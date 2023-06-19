@@ -63,9 +63,14 @@ const ProductItem = ({
       </div>
 
       <div className="product__button__add">
-        <button type="button" className="hvr-icon-float-away">
-          Thêm vào giỏ hàng
+        <button type="button" className="hvr-grow-shadow product__button">
+          <i className="icon-cart"></i>
         </button>
+        <div>
+          <button type="button" className="hvr-grow-shadow product__button">
+            <i className="icon-search"></i>
+          </button>
+          </div>
       </div>
     </div>
   );

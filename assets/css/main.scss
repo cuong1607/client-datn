@@ -897,6 +897,15 @@ h5 {
         }
       }
     }
+    .product__button__add {
+      button {
+        font-size: 16px;
+        
+      }
+    }
+    // &:hover {
+      
+    // }
   }
   .product__image {
     height: 150px;
@@ -1000,7 +1009,30 @@ h5 {
       }
     }
   }
+  .product__button__add {
+    display: flex;
+    justify-content: space-between;
+    button {
+      font-size: 24px;
+      margin: 20px 0 0 0;
+    }
+  }
 }
+
+// .products-item:hover .product__button__add {
+//   display: block;
+//   position: absolute;
+//   top: 100%;
+//   left: 0;
+//   background-color: #fff;
+//   border: 1px solid #ccc;
+//   padding: 10px;
+//   z-index: 9999;
+
+    
+//   background-color: red;
+
+// }
 
 .section-products-featured {
   .section-products-featured__header {

@@ -23,12 +23,12 @@ const ProductsFilter = () => {
       <button type="button" 
         onClick={() => setFiltersOpen(!filtersOpen)} 
         className={`products-filter__menu-btn ${filtersOpen ? 'products-filter__menu-btn--active' : ''}`}>
-          Add Filter <i className="icon-down-open"></i>
+          Thêm tìm kiếm <i className="icon-down-open"></i>
       </button>
       
       <div className={`products-filter__wrapper ${filtersOpen ? 'products-filter__wrapper--open' : ''}`}>
         <div className="products-filter__block">
-          <button type="button">Product type</button>
+          <button type="button">Danh mục</button>
           <div className="products-filter__block__content">
             {productsTypes.map(type => (
               <Checkbox 
@@ -61,7 +61,7 @@ const ProductsFilter = () => {
         </div>
         
         <div className="products-filter__block">
-          <button type="button">Color</button>
+          <button type="button">Màu sắc</button>
           <div className="products-filter__block__content">
             <div className="checkbox-color-wrapper">
               {productsColors.map(type => (
@@ -71,7 +71,7 @@ const ProductsFilter = () => {
           </div>
         </div>
 
-        <button type="submit" className="btn btn-submit btn--rounded btn--yellow">Apply</button>
+        <button type="submit" className="btn btn-submit btn--rounded btn--yellow">Xác nhận</button>
       </div>
     </form>
   )

@@ -10,7 +10,7 @@ const ProductsFeatured = () => {
       <div className="container">
         <header className="section-products-featured__header">
           <h3>BỘ SƯU TẬP NỔI BẬT</h3>
-          <a href="/products" className="btn btn--rounded btn--border">
+          <a href="/products" className="btn btn--rounded btn--border hvr-float-shadow">
             Xem tất cả
           </a>
         </header>
