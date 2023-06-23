@@ -17,6 +17,7 @@ const ProductsContent = () => {
       {data &&
         <section className="products-list">
           {data.map((item: ProductTypeList)  => (
+            console.log('item', item),
             <ProductItem 
               id={item.id} 
               name={item.name}
@@ -25,6 +26,7 @@ const ProductsContent = () => {
               currentPrice={item.currentPrice}
               key={item.id}
               images={item.images} 
+              item={item}
             />
           ))}
         </section>

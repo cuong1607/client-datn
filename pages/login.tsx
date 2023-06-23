@@ -33,23 +33,18 @@ const LoginPage = () => {
         <div className="container">
           <div className="back-button-section">
             <Link href="/products">
-              <i className="icon-left"></i>Back to store
+              <i className="icon-left"></i>Quay lại cửa hàng
             </Link>
           </div>
 
           <div className="form-block">
-            <h2 className="form-block__title">Log in</h2>
-            <p className="form-block__description">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s
-            </p>
+            <h2 className="form-block__title">Đăng nhập</h2>
 
             <form className="form" onSubmit={handleSubmit(onSubmit as any)}>
               <div className="form__input-row">
                 <input
                   className="form__input"
-                  placeholder="email"
+                  placeholder="Ex: email@gmail.com"
                   type="text"
                   {...register("email", {
                     required: true,
@@ -60,13 +55,13 @@ const LoginPage = () => {
 
                 {errors.email && errors.email.type === "required" && (
                   <p className="message message--error">
-                    This field is required
+                    Vui lòng nhập Email!
                   </p>
                 )}
 
                 {errors.email && errors.email.type === "pattern" && (
                   <p className="message message--error">
-                    Please write a valid email
+                    Vui lòng nhập đúng định dạng cho Email
                   </p>
                 )}
               </div>
@@ -80,7 +75,7 @@ const LoginPage = () => {
                 />
                 {errors.password && errors.password.type === "required" && (
                   <p className="message message--error">
-                    This field is required
+                    Vui lòng nhập mật khẩu!
                   </p>
                 )}
               </div>
@@ -97,35 +92,35 @@ const LoginPage = () => {
                       {...register("keepSigned", { required: false })}
                     />
                     <span className="checkbox__check"></span>
-                    <p>Keep me signed in</p>
+                    <p>Nhớ mật khẩu</p>
                   </label>
                 </div>
                 <a
                   href="/forgot-password"
                   className="form__info__forgot-password"
                 >
-                  Forgot password?
+                  Quên tài khoản?
                 </a>
               </div>
 
               <div className="form__btns">
-                <button type="button" className="btn-social fb-btn">
+                <button type="button" className="btn-social fb-btn hvr-glow">
                   <i className="icon-facebook"></i>Facebook
                 </button>
-                <button type="button" className="btn-social google-btn">
+                <button type="button" className="btn-social google-btn hvr-glow">
                   <img src="/images/icons/gmail.svg" alt="gmail" /> Gmail
                 </button>
               </div>
 
               <button
                 type="submit"
-                className="btn btn--rounded btn--yellow btn-submit"
+                className="btn btn--rounded btn--yellow btn-submit hvr-glow"
               >
-                Sign in
+                Đăng nhập
               </button>
 
               <p className="form__signup-link">
-                Not a member yet? <a href="/register">Sign up</a>
+                Bạn có tài khoản chưa? <a href="/register">Đăng ký</a>
               </p>
             </form>
           </div>

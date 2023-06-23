@@ -7,36 +7,31 @@ const RegisterPage = () => (
       <div className="container">
         <div className="back-button-section">
           <Link href="/products">
-            <i className="icon-left"></i>Back to store
+            <i className="icon-left"></i>Quay lại cửa hàng
           </Link>
         </div>
 
         <div className="form-block">
           <h2 className="form-block__title">
-            Create an account and discover the benefits
+            Đăng ký tài khoản
           </h2>
-          <p className="form-block__description">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s
-          </p>
 
           <form className="form">
             <div className="form__input-row">
               <input
                 className="form__input"
-                placeholder="First Name"
+                placeholder="Tên người dùng"
                 type="text"
               />
             </div>
 
-            <div className="form__input-row">
+            {/* <div className="form__input-row">
               <input
                 className="form__input"
                 placeholder="Last Name"
                 type="text"
               />
-            </div>
+            </div> */}
 
             <div className="form__input-row">
               <input className="form__input" placeholder="Email" type="text" />
@@ -63,7 +58,7 @@ const RegisterPage = () => (
                   />
                   <span className="checkbox__check"></span>
                   <p>
-                    I agree to the Google Terms of Service and Privacy Policy
+                    Tôi đồng ý với Điều khoản dịch vụ và Chính sách bảo mật của trang web
                   </p>
                 </label>
               </div>
@@ -71,13 +66,13 @@ const RegisterPage = () => (
 
             <button
               type="button"
-              className="btn btn--rounded btn--yellow btn-submit"
+              className="btn btn--rounded btn--yellow btn-submit hvr-glow"
             >
-              Sign up
+              Đăng ký
             </button>
 
             <p className="form__signup-link">
-              <Link href="/login">Are you already a member?</Link>
+              <Link href="/login">Bạn đã có tài khoản?</Link>
             </p>
           </form>
         </div>

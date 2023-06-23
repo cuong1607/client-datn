@@ -3,7 +3,8 @@ import { some } from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavProduct } from "store/reducers/user";
 import { RootState } from "store";
-import { ProductTypeList } from "types";
+import { ProductStoreType, ProductTypeList } from "types";
+import { addProduct } from "store/reducers/cart";
 
 const ProductItem = ({
   discount,
@@ -12,6 +13,7 @@ const ProductItem = ({
   name,
   price,
   currentPrice,
+  item
 }: ProductTypeList) => {
   const dispatch = useDispatch();
   const { favProducts } = useSelector((state: RootState) => state.user);
@@ -25,6 +27,25 @@ const ProductItem = ({
       })
     );
   };
+  const addToCart = () => {
+    const count = 1;
+    const productToSave: ProductStoreType = { 
+      id: id,
+      name: name,
+      thumb: images ? images[0] : '',
+      price: item.currentPrice,
+      count: 1,
+      color: item.color,
+      size: item.itemSize
+    }
+
+    const productStore = {
+      count,
+      product: productToSave
+    }
+    dispatch(addProduct(productStore));
+    alert('Thêm sản phẩm vào giỏ hàng thành công')
+  }
 
   return (
     <div className="product-item">
@@ -63,7 +84,7 @@ const ProductItem = ({
       </div>
 
       <div className="product__button__add">
-        <button type="button" className="hvr-grow-shadow product__button">
+        <button type="button" onClick={addToCart} className="hvr-grow-shadow product__button">
           <i className="icon-cart"></i>
         </button>
         <div>
