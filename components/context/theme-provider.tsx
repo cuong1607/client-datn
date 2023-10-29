@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { ThemeContext } from "./theme-context";
+import React from "react";
 import { useLocalStorage } from "./local-storage";
+import { ThemeContext } from "./theme-context";
 
 type Props = {
   children?: React.ReactNode;

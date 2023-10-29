@@ -1,8 +1,7 @@
-import ProductItem from "./../../product-item";
 import { ProductTypeList } from "types";
+import ProductItem from "./../../product-item";
 
 // import Swiper core and required components
-import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useState } from "react";
 
 type ProductsCarouselType = {
@@ -13,7 +12,7 @@ const ProductsCarousel = ({ products }: ProductsCarouselType) => {
   const [slidesPerView, setSlidesPerView] = useState(2);
   const [centeredSlides, setCenteredSlides] = useState(false);
   const [spaceBetween, setSpaceBetween] = useState(30);
-
+  console.log(slidesPerView, centeredSlides, spaceBetween);
   useEffect(() => {
     updateWindowSize();
     window.addEventListener("resize", updateWindowSize);
