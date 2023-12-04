@@ -16,10 +16,9 @@ const ForgotPassword = () => {
   } = useForm();
 
   const onSubmit = async (data: ForgotMail) => {
-    const res = await postData(`${server}/api/login`, {
+    const res = await postData(`${server}/login`, {
       email: data.email,
     });
-
     console.log(res);
   };
 

@@ -44,7 +44,7 @@ const LoginPage = () => {
               <div className="form__input-row">
                 <input
                   className="form__input"
-                  placeholder="Ex: email@gmail.com"
+                  placeholder="Ex: 0987654321"
                   type="text"
                   {...register("email", {
                     required: true,
@@ -55,22 +55,22 @@ const LoginPage = () => {
 
                 {errors.email && errors.email.type === "required" && (
                   <p className="message message--error">
-                    Vui lòng nhập Email!
+                    Vui lòng nhập tên đăng nhập!
                   </p>
                 )}
 
-                {errors.email && errors.email.type === "pattern" && (
+                {/* {errors.email && errors.email.type === "pattern" && (
                   <p className="message message--error">
                     Vui lòng nhập đúng định dạng cho Email
                   </p>
-                )}
+                )} */}
               </div>
 
               <div className="form__input-row">
                 <input
                   className="form__input"
                   type="password"
-                  placeholder="Password"
+                  placeholder="Mật khẩu"
                   {...register("password", { required: true })}
                 />
                 {errors.password && errors.password.type === "required" && (
@@ -107,7 +107,10 @@ const LoginPage = () => {
                 <button type="button" className="btn-social fb-btn hvr-glow">
                   <i className="icon-facebook"></i>Facebook
                 </button>
-                <button type="button" className="btn-social google-btn hvr-glow">
+                <button
+                  type="button"
+                  className="btn-social google-btn hvr-glow"
+                >
                   <img src="/images/icons/gmail.svg" alt="gmail" /> Gmail
                 </button>
               </div>

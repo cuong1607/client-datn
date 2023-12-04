@@ -3,16 +3,20 @@ import Checkbox from "./form-builder/checkbox";
 import CheckboxColor from "./form-builder/checkbox-color";
 
 // data
-import productsTypes from "./../../utils/data/products-types";
+import { useQuery } from "react-query";
+import { CategoryService } from "../../utils/service/category";
 import productsColors from "./../../utils/data/products-colors";
 import productsSizes from "./../../utils/data/products-sizes";
-
 const ProductsFilter = () => {
   const [filtersOpen, setFiltersOpen] = useState(false);
-
+  const { data: category } = useQuery<any>(["CategoryService"], () =>
+    CategoryService.get({ page: 1 })
+  );
   const addQueryParams = () => {
     // query params changes
   };
+
+  console.log("category", category);
 
   return (
     <form className="products-filter" onChange={addQueryParams}>
@@ -34,7 +38,7 @@ const ProductsFilter = () => {
         <div className="products-filter__block">
           <button type="button">Danh mục</button>
           <div className="products-filter__block__content">
-            {productsTypes.map((type) => (
+            {category?.data?.map((type: any) => (
               <Checkbox key={type.id} name="product-type" label={type.name} />
             ))}
           </div>
