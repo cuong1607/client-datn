@@ -16,3 +16,18 @@ export const CategoryService = {
     return AxiosClient.get(url, { params: { ...params, limit: 999 } });
   },
 };
+
+export const ConfigSetting = {
+  getPrice: (params: IQuery) => {
+    const url = `/price`;
+    return AxiosClient.get(url, { params: { ...params, limit: 999 } });
+  },
+  getColor: (params: IQuery) => {
+    const url = `/color`;
+    return AxiosClient.get(url, { params: { ...params, limit: 999 } });
+  },
+  getSize: (params: IQuery) => {
+    const url = `/size`;
+    return AxiosClient.get(url, { params: { ...params, limit: 999 } });
+  },
+};

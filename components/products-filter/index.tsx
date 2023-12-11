@@ -4,13 +4,18 @@ import CheckboxColor from "./form-builder/checkbox-color";
 
 // data
 import { useQuery } from "react-query";
-import { CategoryService } from "../../utils/service/category";
-import productsColors from "./../../utils/data/products-colors";
-import productsSizes from "./../../utils/data/products-sizes";
+import { CategoryService, ConfigSetting } from "../../utils/service/category";
+import { Slider } from "antd";
 const ProductsFilter = () => {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const { data: category } = useQuery<any>(["CategoryService"], () =>
     CategoryService.get({ page: 1 })
+  );
+  const { data: color } = useQuery<any>(["color"], () =>
+    ConfigSetting.getColor({ page: 1, limit: 999 })
+  );
+  const { data: size } = useQuery<any>(["size"], () =>
+    ConfigSetting.getSize({ page: 1, limit: 999 })
   );
   const addQueryParams = () => {
     // query params changes
@@ -53,18 +58,19 @@ const ProductsFilter = () => {
               defaultValue={[3, 10]}
               tipFormatter={(value) => `${value}%`}
             /> */}
+            <Slider defaultValue={0} min={0} max={10000000} />
           </div>
         </div>
 
         <div className="products-filter__block">
           <button type="button">Size</button>
           <div className="products-filter__block__content checkbox-square-wrapper">
-            {productsSizes.map((type) => (
+            {size?.data?.map((type: any) => (
               <Checkbox
                 type="square"
                 key={type.id}
                 name="product-size"
-                label={type.label}
+                label={type.name}
               />
             ))}
           </div>
@@ -74,12 +80,12 @@ const ProductsFilter = () => {
           <button type="button">Màu sắc</button>
           <div className="products-filter__block__content">
             <div className="checkbox-color-wrapper">
-              {productsColors.map((type) => (
+              {color?.data?.map((type: any) => (
                 <CheckboxColor
                   key={type.id}
-                  valueName={type.color}
+                  valueName={type.name}
                   name="product-color"
-                  color={type.color}
+                  color={type.code}
                 />
               ))}
             </div>
