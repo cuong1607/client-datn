@@ -899,7 +899,7 @@ h5 {
     }
     .product__button__add {
       button {
-        font-size: 16px;
+        font-size: 14px;
         
       }
     }
@@ -1353,6 +1353,7 @@ h5 {
     width: 100%;
     position: relative;
     padding-bottom: 100%;
+    border-left: 1px solid #d4d4d4;
     border-top: 1px solid #d4d4d4;
     border-bottom: 1px solid #d4d4d4;
     border-right: 1px solid #d4d4d4;
@@ -1376,7 +1377,9 @@ h5 {
     overflow: hidden;
   }
   input:checked + .checkbox__check {
-    background-color: var(--background);
+    // background-color: #dddbdb;
+    border-color: var(--text-primary);
+    // background-color: var(--background);
   }
 }
 
@@ -1638,7 +1641,7 @@ h5 {
     position: relative;
     width: calc(100% / 6);
     input:checked + .checkbox__check {
-      background-color: var(--text-primary);
+      // background-color: var(--text-primary);
       border-color: var(--text-primary);
       &:before {
         opacity: 0;
@@ -1662,7 +1665,7 @@ h5 {
       margin-right: 0;
       position: relative;
       padding-bottom: 100%;
-      border-left: none;
+      // border-left: none;
       border-top: 1px solid var(--border-primary);
       border-bottom: 1px solid var(--border-primary);
       border-right: 1px solid var(--border-primary);
@@ -1930,7 +1933,6 @@ h5 {
       margin-bottom: 0;
     }
     h5 {
-      color: var(--text-primary);
       font-weight: 300;
       font-size: 13px;
       margin-bottom: 19px;
@@ -1940,24 +1942,19 @@ h5 {
     }
     .checkbox-color-wrapper {
       .checkbox-color {
-        color: var(--text-primary);
         width: 30px;
         height: 30px;
         margin-right: 8px;
         border: none;
         @include breakpoint(phone) {
-          color: var(--text-primary);
           width: 43px;
           height: 43px;
           margin-right: 13px;
         }
         .checkbox__check {
-          color: var(--text-primary);
-          border: 1px solid #d4d4d4;
+          border: 1px solid #D4D4D4;
         }
         .checkbox__color {
-          color: var(--text-primary);
-
           top: 4px;
           left: 4px;
           right: 4px;
@@ -1976,7 +1973,7 @@ h5 {
     display: flex;
     h4 {
       font-weight: 400;
-      color: #ff0000;
+      color: #FF0000;
       font-size: 18px;
       @include breakpoint(phone) {
         font-size: 30px;
@@ -1986,7 +1983,7 @@ h5 {
       margin-left: 30px;
       font-weight: 400;
       font-size: 18px;
-      color: #cecece;
+      color: #CECECE;
       @include breakpoint(phone) {
         font-size: 30px;
       }
@@ -1997,14 +1994,13 @@ h5 {
     right: 0;
     text-align: right;
     line-height: 146%;
-    color: #cecece;
+    color: #CECECE;
     font-size: 12px;
     position: absolute;
   }
   .product__name {
     font-size: 20px;
     font-weight: 300;
-    color: var(--text-primary);
     margin-bottom: 9px;
     @include breakpoint(phone) {
       font-size: 30px;
@@ -2012,8 +2008,8 @@ h5 {
     }
   }
   .product-on-sale {
-    background-color: #ff0000;
-    color: #fff;
+    background-color: #FF0000;
+    color: #FFF;
     font-size: 11px;
     font-weight: 500;
     padding: 5px 9px;

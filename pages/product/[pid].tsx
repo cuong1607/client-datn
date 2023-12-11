@@ -9,29 +9,38 @@ import Gallery from "../../components/product-single/gallery";
 import Content from "../../components/product-single/content";
 import Description from "../../components/product-single/description";
 import Reviews from "../../components/product-single/reviews";
-import { server } from "../../utils/server";
 // types
 import { ProductType } from "types";
-
+import { ProductService } from "utils/service/product";
+import { useQuery } from "react-query";
+import { useRouter } from "next/router";
 type ProductPageType = {
   product: ProductType;
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const pid = query.pid;
-  const res = await fetch(`${server}/api/product/${pid}`);
-  const product = await res.json();
+// export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+//   const pid = query.pid;
+// const { data: productDetail } = useQuery<any>(["detail"], () =>
+//   ProductService.getDetail(Number(pid))
+// );
+//   return {
+//     props: {
+//       productDetail,
+//     },
+//   };
+// };
 
-  return {
-    props: {
-      product,
-    },
-  };
-};
-
-const Product = ({ product }: ProductPageType) => {
+const Product = () => {
+  const router = useRouter();
+  const {
+    query: { pid },
+  } = router;
+  const { data: productDetail } = useQuery<any>(["detail", pid], () =>
+    ProductService.getDetail(Number(pid))
+  );
+  console.log("pid", pid);
   const [showBlock, setShowBlock] = useState("description");
-  console.log("product", product);
+  console.log("getDetail", productDetail);
   return (
     <Layout>
       <Breadcrumb />
@@ -39,11 +48,11 @@ const Product = ({ product }: ProductPageType) => {
       <section className="product-single">
         <div className="container">
           <div className="product-single__content">
-            <Gallery images={product.images} />
-            <Content product={product} />
+            <Gallery images={productDetail?.data?.product_images} />
+            <Content product={productDetail?.data} />
           </div>
 
-          <div className="product-single__info">
+          {/* <div className="product-single__info">
             <div className="product-single__info-btns">
               <button
                 type="button"
@@ -66,8 +75,11 @@ const Product = ({ product }: ProductPageType) => {
             </div>
 
             <Description show={showBlock === "description"} />
-            <Reviews product={product} show={showBlock === "reviews"} />
-          </div>
+            <Reviews
+              product={productDetail?.data}
+              show={showBlock === "reviews"}
+            />
+          </div> */}
         </div>
       </section>
 

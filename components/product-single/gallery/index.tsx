@@ -1,16 +1,16 @@
 type GalleryProductType = {
-  images: string[];
+  images: any[];
 };
 
 const Gallery = ({ images }: GalleryProductType) => {
-  const featImage = images?.[0];
-
+  const featImage = images?.[0]?.path;
+  console.log("image?.path", images?.[0].path);
   return (
     <section className="product-gallery">
       <div className="product-gallery__thumbs">
         {images?.map((image) => (
-          <div key={image} className="product-gallery__thumb">
-            <img src={image} alt="" />
+          <div key={image?.id} className="product-gallery__thumb">
+            <img src={image?.path} alt="" />
           </div>
         ))}
       </div>

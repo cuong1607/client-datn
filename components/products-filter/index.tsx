@@ -5,11 +5,25 @@ import CheckboxColor from "./form-builder/checkbox-color";
 // data
 import { useQuery } from "react-query";
 import { CategoryService, ConfigSetting } from "../../utils/service/category";
-import { Slider } from "antd";
+// import { Slider } from "antd";
+import { SliderMarks } from "antd/es/slider";
+import Slider from "rc-slider";
+import { currencyFormat } from "utils";
+const { createSliderWithTooltip } = Slider;
+const Range = createSliderWithTooltip(Slider.Range);
+const marks: SliderMarks = {
+  0: "0Đ",
+  5000000: {
+    style: {
+      color: "#f50",
+    },
+    label: <strong>5.000.000Đ</strong>,
+  },
+};
 const ProductsFilter = () => {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const { data: category } = useQuery<any>(["CategoryService"], () =>
-    CategoryService.get({ page: 1 })
+    CategoryService.get({ page: 1, limit: 999 })
   );
   const { data: color } = useQuery<any>(["color"], () =>
     ConfigSetting.getColor({ page: 1, limit: 999 })
@@ -20,9 +34,7 @@ const ProductsFilter = () => {
   const addQueryParams = () => {
     // query params changes
   };
-
   console.log("category", category);
-
   return (
     <form className="products-filter" onChange={addQueryParams}>
       <button
@@ -50,7 +62,7 @@ const ProductsFilter = () => {
         </div>
 
         <div className="products-filter__block">
-          <button type="button">Price</button>
+          <button type="button">Giá tiền</button>
           <div className="products-filter__block__content">
             {/* <Range
               min={0}
@@ -58,12 +70,24 @@ const ProductsFilter = () => {
               defaultValue={[3, 10]}
               tipFormatter={(value) => `${value}%`}
             /> */}
-            <Slider defaultValue={0} min={0} max={10000000} />
+            <Range
+              min={0}
+              max={5000000}
+              defaultValue={[50000, 1000000]}
+              tipFormatter={(value) => `${currencyFormat(value)}đ`}
+            />
+            {/* <Slider
+              range
+              marks={marks}
+              defaultValue={[0, 5000000]}
+              min={0}
+              max={5000000}
+            /> */}
           </div>
         </div>
 
         <div className="products-filter__block">
-          <button type="button">Size</button>
+          <button type="button">Kích thước</button>
           <div className="products-filter__block__content checkbox-square-wrapper">
             {size?.data?.map((type: any) => (
               <Checkbox
@@ -83,7 +107,7 @@ const ProductsFilter = () => {
               {color?.data?.map((type: any) => (
                 <CheckboxColor
                   key={type.id}
-                  valueName={type.name}
+                  valueName={type.code}
                   name="product-color"
                   color={type.code}
                 />

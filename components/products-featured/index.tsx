@@ -1,10 +1,12 @@
+import { useQuery } from "react-query";
 import ProductsCarousel from "./carousel";
-import useSwr from "swr";
-
+import { ProductService } from "utils/service/product";
+import React from "react";
 const ProductsFeatured = () => {
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
-  const { data } = useSwr("/product", fetcher);
-
+  const [page, setPage] = React.useState<number>(1);
+  const { data: product } = useQuery<any>(["color"], () =>
+    ProductService.get({ page: page })
+  );
   return (
     <section className="section section-products-featured">
       <div className="container">
@@ -18,7 +20,7 @@ const ProductsFeatured = () => {
           </a>
         </header>
 
-        <ProductsCarousel products={data} />
+        <ProductsCarousel products={product?.data} />
       </div>
     </section>
   );

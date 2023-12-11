@@ -72,7 +72,6 @@ AxiosClient.interceptors.response.use(
         LocalStorage.removeToken();
         window.location.reload();
       }
-      // cover response to camelCase
       return response.data;
     }
 

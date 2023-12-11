@@ -1,20 +1,20 @@
-import useSwr from "swr";
 import ProductItem from "../../product-item";
 import ProductsLoading from "./loading";
 import { ProductTypeList } from "types";
-
+import { useQuery } from "react-query";
+import { ProductService } from "../../../utils/service/product";
 const ProductsContent = () => {
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
-  const { data, error } = useSwr("/product", fetcher);
-
+  const { data: product, error } = useQuery<any>(["color"], () =>
+    ProductService.get({ page: 1, limit: 999 })
+  );
   if (error) return <div>Failed to load users</div>;
   return (
     <>
-      {!data && <ProductsLoading />}
+      {!product?.data && <ProductsLoading />}
 
-      {data && (
+      {product?.data && (
         <section className="products-list">
-          {data.map(
+          {product?.data?.map(
             (item: ProductTypeList) => (
               console.log("item", item),
               (
@@ -23,9 +23,11 @@ const ProductsContent = () => {
                   name={item.name}
                   price={item.price}
                   color={item.color}
-                  currentPrice={item.currentPrice}
+                  currentPrice={Number(item.price)}
                   key={item.id}
-                  images={item.images}
+                  product_images={item.product_images?.map(
+                    (it: { path: string }) => it.path
+                  )}
                   item={item}
                 />
               )

@@ -5,15 +5,16 @@ import { toggleFavProduct } from "store/reducers/user";
 import { RootState } from "store";
 import { ProductStoreType, ProductTypeList } from "types";
 import { addProduct } from "store/reducers/cart";
-
+import { Notification, currencyFormat } from "utils";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 const ProductItem = ({
   discount,
-  images,
+  product_images,
   id,
   name,
   price,
   currentPrice,
-  item
+  item,
 }: ProductTypeList) => {
   const dispatch = useDispatch();
   const { favProducts } = useSelector((state: RootState) => state.user);
@@ -29,23 +30,23 @@ const ProductItem = ({
   };
   const addToCart = () => {
     const count = 1;
-    const productToSave: ProductStoreType = { 
+    const productToSave: ProductStoreType = {
       id: id,
       name: name,
-      thumb: images ? images[0] : '',
-      price: item.currentPrice,
+      thumb: product_images ? product_images[0] : "",
+      price: item.price,
       count: 1,
       color: item.color,
-      size: item.itemSize
-    }
+      size: item.itemSize,
+    };
 
     const productStore = {
       count,
-      product: productToSave
-    }
+      product: productToSave,
+    };
     dispatch(addProduct(productStore));
-    alert('Thêm sản phẩm vào giỏ hàng thành công')
-  }
+    Notification("success", "Thêm sản phẩm vào giỏ hàng thành công");
+  };
 
   return (
     <div className="product-item">
@@ -61,7 +62,7 @@ const ProductItem = ({
         <Link className="hvr-float-shadow" href={`/product/${id}`}>
           <img
             style={{ objectFit: "contain" }}
-            src={images ? images[0] : ""}
+            src={product_images ? product_images[0] : ""}
             alt="product"
           />
           {discount && <span className="product__discount">{discount}%</span>}
@@ -75,7 +76,7 @@ const ProductItem = ({
             "product__price " + (discount ? "product__price--discount" : "")
           }
         >
-          <h4>${currentPrice}</h4>
+          <h4>{price} VNĐ</h4>
 
           {discount && (
             <span style={{ textDecoration: "line-through" }}>${price}</span>
@@ -84,14 +85,17 @@ const ProductItem = ({
       </div>
 
       <div className="product__button__add">
-        <button type="button" onClick={addToCart} className="hvr-grow-shadow product__button">
-          <i className="icon-cart"></i>
+        <button type="button" onClick={addToCart} className="product__button">
+          <p>
+            <ShoppingCartOutlined />{" "}
+            <span style={{ fontSize: "14px" }}>Thêm vào giỏ hàng</span>
+          </p>
         </button>
-        <div>
-          <button type="button" className="hvr-grow-shadow product__button">
+        {/* <div>
+          <button type="button" className="product__button">
             <i className="icon-search"></i>
           </button>
-          </div>
+        </div> */}
       </div>
     </div>
   );

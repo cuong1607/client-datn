@@ -1,6 +1,6 @@
 import { ProductTypeList } from "types";
 import ProductItem from "./../../product-item";
-
+import React from "react";
 // import Swiper core and required components
 import { useEffect, useState } from "react";
 
@@ -36,21 +36,27 @@ const ProductsCarousel = ({ products }: ProductsCarouselType) => {
   }
 
   if (!products) return <div>Loading</div>;
-
+  console.log("products", products);
+  // React.useEffect(() => {}, [products]);
   return (
     <div className="products-carousel">
-      {products.map((item) => (
-        <ProductItem
-          id={item.id}
-          name={item.name}
-          price={item.price}
-          color={item.color}
-          discount={item.discount}
-          currentPrice={item.currentPrice}
-          key={item.id}
-          images={item.images}
-        />
-      ))}
+      {products?.map(
+        (item) => (
+          console.log("itemitemitemitem", item),
+          (
+            <ProductItem
+              id={item.id}
+              name={item.name}
+              price={item.price}
+              color={item.color}
+              discount={item.discount}
+              currentPrice={item.currentPrice}
+              key={item.id}
+              product_images={item.product_images?.[0]?.path}
+            />
+          )
+        )
+      )}
     </div>
   );
 };
