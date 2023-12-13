@@ -1,16 +1,19 @@
 import Layout from "../layouts/Main";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { server } from "../utils/server";
-import { postData } from "../utils/services";
+import { AuthService } from "../utils/service/auth";
+import { Notification } from "utils";
+import { useRouter } from "next/router";
 
 type FormValues = {
-  email: string;
+  phone: string;
   password: string;
   keepSigned?: boolean;
 };
 
 const LoginPage = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -18,13 +21,14 @@ const LoginPage = () => {
   } = useForm();
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    console.log(data);
-    const res = await postData(`${server}/api/login`, {
-      email: data.email,
+    const res = await AuthService.login({
+      phone: data.phone,
       password: data.password,
     });
-
-    console.log(res);
+    if (res?.status) {
+      Notification("success", "Đăng nhập thành công");
+      router.push("/");
+    }
   };
 
   return (
@@ -44,26 +48,25 @@ const LoginPage = () => {
               <div className="form__input-row">
                 <input
                   className="form__input"
-                  placeholder="Ex: 0987654321"
+                  placeholder="Số điện thoại"
                   type="text"
-                  {...register("email", {
+                  {...register("phone", {
                     required: true,
-                    pattern:
-                      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    pattern: /^\d{10}$/,
                   })}
                 />
 
-                {errors.email && errors.email.type === "required" && (
+                {errors.phone && errors.phone.type === "required" && (
                   <p className="message message--error">
-                    Vui lòng nhập tên đăng nhập!
+                    Vui lòng nhập số điện thoại đăng nhập!
                   </p>
                 )}
 
-                {/* {errors.email && errors.email.type === "pattern" && (
+                {errors.phone && errors.phone.type === "pattern" && (
                   <p className="message message--error">
-                    Vui lòng nhập đúng định dạng cho Email
+                    Vui lòng nhập đúng định dạng cho Số điện thoại
                   </p>
-                )} */}
+                )}
               </div>
 
               <div className="form__input-row">
@@ -101,18 +104,6 @@ const LoginPage = () => {
                 >
                   Quên tài khoản?
                 </a>
-              </div>
-
-              <div className="form__btns">
-                <button type="button" className="btn-social fb-btn hvr-glow">
-                  <i className="icon-facebook"></i>Facebook
-                </button>
-                <button
-                  type="button"
-                  className="btn-social google-btn hvr-glow"
-                >
-                  <img src="/images/icons/gmail.svg" alt="gmail" /> Gmail
-                </button>
               </div>
 
               <button

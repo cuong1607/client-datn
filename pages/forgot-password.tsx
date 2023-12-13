@@ -5,7 +5,7 @@ import { server } from "../utils/server";
 import { postData } from "../utils/services";
 
 type ForgotMail = {
-  email: string;
+  phone: string;
 };
 
 const ForgotPassword = () => {
@@ -17,7 +17,7 @@ const ForgotPassword = () => {
 
   const onSubmit = async (data: ForgotMail) => {
     const res = await postData(`${server}/login`, {
-      email: data.email,
+      phone: data.phone,
     });
     console.log(res);
   };
@@ -28,38 +28,37 @@ const ForgotPassword = () => {
         <div className="container">
           <div className="back-button-section">
             <Link href="/products">
-              <i className="icon-left"></i>Back to shop
+              <i className="icon-left"></i>Quay lại cửa hàng
             </Link>
           </div>
 
           <div className="form-block">
-            <h2 className="form-block__title">Forgot your password?</h2>
+            <h2 className="form-block__title">Quên mật khẩu?</h2>
             <p className="form-block__description">
-              Enter your email or phone number and recover your account
+              Vui lòng nhập số điện thoại!
             </p>
 
             <form className="form" onSubmit={handleSubmit(onSubmit as any)}>
               <div className="form__input-row">
                 <input
                   className="form__input"
-                  placeholder="email"
+                  placeholder="Số điện thoại"
                   type="text"
-                  {...register("email", {
+                  {...register("phone", {
                     required: true,
-                    pattern:
-                      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    pattern: /^\d{10}$/,
                   })}
                 />
 
-                {errors.email && errors.email.type === "required" && (
+                {errors.phone && errors.phone.type === "required" && (
                   <p className="message message--error">
-                    This field is required
+                    Vui lòng nhập số điện thoại!
                   </p>
                 )}
 
-                {errors.email && errors.email.type === "pattern" && (
+                {errors.phone && errors.phone.type === "pattern" && (
                   <p className="message message--error">
-                    Please write a valid email
+                    Vui lòng nhập đúng định dạng cho Số điện thoại
                   </p>
                 )}
               </div>
@@ -68,12 +67,12 @@ const ForgotPassword = () => {
                 <input
                   className="form__input"
                   type="password"
-                  placeholder="Password"
+                  placeholder="Mật khẩu"
                   {...register("password", { required: true })}
                 />
                 {errors.password && errors.password.type === "required" && (
                   <p className="message message--error">
-                    This field is required
+                    Vui lòng nhập mật khẩu!
                   </p>
                 )}
               </div>
@@ -82,7 +81,7 @@ const ForgotPassword = () => {
                 type="submit"
                 className="btn btn--rounded btn--yellow btn-submit"
               >
-                Reset password
+                Lấy lại mật khẩu
               </button>
             </form>
           </div>

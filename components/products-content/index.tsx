@@ -7,9 +7,7 @@ const ProductsContent = () => {
   return (
     <section className="products-content">
       <div className="products-content__intro">
-        <h2>
-          Kính thời trang <span>(133)</span>
-        </h2>
+        <h2>Kính thời trang</h2>
         <button
           type="button"
           onClick={() => setOrderProductsOpen(!orderProductsOpen)}

@@ -37,7 +37,6 @@ const Content = ({ product }: ProductContent) => {
       })
     );
   };
-  console.log("productContent", product);
   const addToCart = () => {
     const productToSave: ProductStoreType = {
       id: product.id,

@@ -90,15 +90,9 @@ const Header = ({ isErrorPage }: HeaderType) => {
             className="hvr-underline-from-left"
             href="#"
           >
-            Cảm hứng
+            Danh mục sản phẩm
           </a>
-          <a
-            style={{ height: "25px" }}
-            className="hvr-underline-from-left"
-            href="#"
-          >
-            Store
-          </a>
+
           <button className="site-nav__btn">
             <p>Account</p>
           </button>
@@ -119,7 +113,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
               <input
                 type="text"
                 name="search"
-                placeholder="Enter the product you are looking for"
+                placeholder="Nhập tên sản phẩm"
               />
             </form>
             <i

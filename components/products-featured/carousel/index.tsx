@@ -3,6 +3,7 @@ import ProductItem from "./../../product-item";
 import React from "react";
 // import Swiper core and required components
 import { useEffect, useState } from "react";
+import { currencyFormat } from "utils";
 
 type ProductsCarouselType = {
   products: ProductTypeList[];
@@ -47,10 +48,10 @@ const ProductsCarousel = ({ products }: ProductsCarouselType) => {
             <ProductItem
               id={item.id}
               name={item.name}
-              price={item.price}
+              price={currencyFormat(Number(item.price))}
               color={item.color}
               discount={item.discount}
-              currentPrice={item.currentPrice}
+              currentPrice={currencyFormat(item.currentPrice)}
               key={item.id}
               product_images={item.product_images?.[0]?.path}
             />

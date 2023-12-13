@@ -5,7 +5,7 @@ import { toggleFavProduct } from "store/reducers/user";
 import { RootState } from "store";
 import { ProductStoreType, ProductTypeList } from "types";
 import { addProduct } from "store/reducers/cart";
-import { Notification, currencyFormat } from "utils";
+import { Notification } from "utils";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 const ProductItem = ({
   discount,
@@ -47,6 +47,7 @@ const ProductItem = ({
     dispatch(addProduct(productStore));
     Notification("success", "Thêm sản phẩm vào giỏ hàng thành công");
   };
+  console.log("currentPrice", price);
 
   return (
     <div className="product-item">
@@ -62,7 +63,7 @@ const ProductItem = ({
         <Link className="hvr-float-shadow" href={`/product/${id}`}>
           <img
             style={{ objectFit: "contain" }}
-            src={product_images ? product_images[0] : ""}
+            src={product_images ? product_images : ""}
             alt="product"
           />
           {discount && <span className="product__discount">{discount}%</span>}
