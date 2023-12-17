@@ -9,6 +9,8 @@ interface IProps {
 }
 const ProductsContent = (props: IProps) => {
   const { product } = props;
+  console.log('productItem', product);
+  
   return (
     <>
       {!product?.data && <ProductsLoading />}
@@ -23,11 +25,8 @@ const ProductsContent = (props: IProps) => {
               color={item.color}
               currentPrice={currencyFormat(Number(item.price))}
               key={item.id}
-              product_images={
-                item?.product_images?.length
-                  ? item.product_images?.map((it: { path: string }) => it.path)
-                  : item?.product_images
-              }
+              product_images={item?.product_images}
+              product_prices={item?.product_prices}
               item={item}
             />
           ))}

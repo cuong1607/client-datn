@@ -51,7 +51,6 @@ const ProductsFilter = ({
               max={5000000}
               defaultValue={[50000, 1000000]}
               onChange={(value) => {
-                console.log(value);
               }}
               tipFormatter={(value) => `${currencyFormat(value)}đ`}
             />
@@ -65,7 +64,11 @@ const ProductsFilter = ({
               <CheckBoxComponent
                 onChange={(item: any) => {
                   const arr = item.map((it: any) => it);
-                  returnFilter({ color_ids: arr.join(", ") || "" });
+                  if(arr?.length){
+                    returnFilter({ color_ids: arr.join(", ") || "" });
+                  } else {
+                    returnFilter({ color_ids: null });
+                  }
                 }}
                 apiUrl="/color"
               />
@@ -77,7 +80,6 @@ const ProductsFilter = ({
           <div className="products-filter__block__content">
             <CheckBoxComponent
               onChange={(item: any) => {
-                console.log("item", item);
 
                 // const arr = item.map((it: any) => it);
                 // returnFilter({ age_group_ids: arr.join(", ") || "" });

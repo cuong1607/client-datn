@@ -7,9 +7,12 @@ import { ProductStoreType, ProductTypeList } from "types";
 import { addProduct } from "store/reducers/cart";
 import { Notification } from "utils";
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import React from "react";
+import { Tag } from "antd";
 const ProductItem = ({
   discount,
   product_images,
+  product_prices,
   id,
   name,
   price,
@@ -17,6 +20,8 @@ const ProductItem = ({
   item,
 }: ProductTypeList) => {
   const dispatch = useDispatch();
+  const [minPrice, setMinPrice] = React.useState<number>(1);
+  const [maxnPrice, setMaxPrice] = React.useState<number>();
   const { favProducts } = useSelector((state: RootState) => state.user);
 
   const isFavourite = some(favProducts, (productId) => productId === id);
@@ -47,7 +52,21 @@ const ProductItem = ({
     dispatch(addProduct(productStore));
     Notification("success", "Thêm sản phẩm vào giỏ hàng thành công");
   };
-
+  React.useEffect(() => {
+    if (product_prices) {
+      const minAmount = Math.min(
+        ...product_prices.map((item: any) => parseInt(item.price)),
+        ...product_prices.map((item: any) => parseInt(item.discount))
+      );
+      setMinPrice(minAmount);
+      // Lấy ra số tiền lớn nhất trong price và discount
+      const maxAmount = Math.max(
+        ...product_prices.map((item: any) => parseInt(item.price)),
+        ...product_prices.map((item: any) => parseInt(item.discount))
+      );
+      setMaxPrice(maxAmount);
+    }
+  }, [item]);
   return (
     <div className="product-item">
       <div className="product__image">
@@ -62,10 +81,12 @@ const ProductItem = ({
         <Link className="hvr-float-shadow" href={`/product/${id}`}>
           <img
             style={{ objectFit: "contain" }}
-            src={product_images ? product_images : ""}
-            alt="product"
+            src={product_images.length ? product_images[0]?.path : ""}
+            alt="productItem"
           />
-          {discount && <span className="product__discount">{discount}%</span>}
+          {minPrice && (
+            <span className="product__discount">{minPrice} VNĐ</span>
+          )}
         </Link>
       </div>
 
@@ -73,29 +94,22 @@ const ProductItem = ({
         <h3>{name}</h3>
         <div
           className={
-            "product__price " + (discount ? "product__price--discount" : "")
+            "product__price " + (minPrice ? "product__price--discount" : "")
           }
         >
-          <h4>{price} VNĐ</h4>
+          <h4>{minPrice} VNĐ</h4>
 
-          {discount && (
-            <span style={{ textDecoration: "line-through" }}>${price}</span>
+          {minPrice && (
+            <span style={{ textDecoration: "line-through" }}>${maxnPrice}</span>
           )}
         </div>
       </div>
 
-      <div className="product__button__add">
-        <button type="button" onClick={addToCart} className="product__button">
-          <p>
-            <ShoppingCartOutlined />{" "}
-            <span style={{ fontSize: "14px" }}>Thêm vào giỏ hàng</span>
-          </p>
-        </button>
-        {/* <div>
-          <button type="button" className="product__button">
-            <i className="icon-search"></i>
-          </button>
-        </div> */}
+      <div style={{marginTop: '10px'}}>
+        {product_prices?.map((item: any) => {
+          console.log("product_prices", item);
+          return <Tag style={item?.code === '#ffffff' ? {color: 'black', background: '#dab3b3f'} : item?.code === '#000000' ? {color: 'white', border: '1px solid #000000'} : {}} color={item?.code}>{item?.color}</Tag>;
+        })}
       </div>
     </div>
   );

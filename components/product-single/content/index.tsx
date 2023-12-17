@@ -51,7 +51,6 @@ const Content = ({ product }: ProductContent) => {
 
     dispatch(addProduct(productStore));
   };
-  console.log("prodâsaauct", product);
   const options: SelectProps["options"] = [];
 
   React.useEffect(() => {
@@ -69,7 +68,6 @@ const Content = ({ product }: ProductContent) => {
       setMaxPrice(maxAmount);
     }
   }, [product]);
-  console.log("options", options);
 
   return (
     <section className="product-content">

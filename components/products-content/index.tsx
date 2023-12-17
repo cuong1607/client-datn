@@ -24,9 +24,6 @@ const ProductsContent = ({ product }: any) => {
           <div className="products__filter__select">
             <h4>Hiển thị sản phẩm: </h4>
             <div className="select-wrapper">
-              {/* <select>
-                <option>Phổ biến</option>
-              </select> */}
               <Select
                 defaultValue="lucy"
                 style={{ width: 120 }}
@@ -40,10 +37,6 @@ const ProductsContent = ({ product }: any) => {
           <div className="products__filter__select">
             <h4>Sắp xếp theo: </h4>
             <div className="select-wrapper">
-              {/* <select>
-                <option>Tăng - Giảm</option>
-                <option>Giảm - Tăng</option>
-              </select> */}
               <Select
                 defaultValue="lucy"
                 style={{ width: 120 }}

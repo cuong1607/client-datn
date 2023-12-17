@@ -12,7 +12,6 @@ const AxiosClient = axios.create({
 // handle request to convert all api requests to snake_case
 AxiosClient.interceptors.request.use(async (config: any) => {
   const token = LocalStorage.getToken();
-  console.log("token", token);
   if (token && config.headers) {
     config.headers.token = `${token}`;
   }

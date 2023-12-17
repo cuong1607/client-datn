@@ -2,13 +2,19 @@ import { useQuery } from "react-query";
 import ProductsCarousel from "./carousel";
 import { ProductService } from "utils/service/product";
 import React from "react";
-const initialFilterQuery = {};
+import { useRouter } from "next/router";
 const ProductsFeatured = () => {
-  const [page, setPage] = React.useState<number>(1);
-  const [filterQuery, setFilterQuery] = React.useState<any>(initialFilterQuery);
-  const { data: product } = useQuery<any>(["product", filterQuery, page], () =>
-    ProductService.get({ page, ...filterQuery })
+  const router = useRouter();
+  const {
+    query: { pid },
+  } = router;
+  // const [page, setPage] = React.useState<number>(1);
+  // const [filterQuery, setFilterQuery] = React.useState<any>(initialFilterQuery);
+  const { data: product } = useQuery<any>(["product", pid], () =>
+    ProductService.get({ page: 1, limit: 8 })
   );
+  console.log('productproduct', product);
+  
   return (
     <section className="section section-products-featured">
       <div className="container">

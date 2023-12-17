@@ -18,7 +18,8 @@ const ProductsCarousel = ({ products }: ProductsCarouselType) => {
     window.addEventListener("resize", updateWindowSize);
     return () => window.removeEventListener("resize", updateWindowSize);
   }, []);
-
+  console.log('ProductsCarousel', products);
+  
   function updateWindowSize() {
     if (window.innerWidth > 768) {
       setSlidesPerView(3);
@@ -48,7 +49,8 @@ const ProductsCarousel = ({ products }: ProductsCarouselType) => {
           discount={item.discount}
           currentPrice={currencyFormat(item.currentPrice)}
           key={item.id}
-          product_images={item.product_images?.[0]?.path}
+          product_prices={item?.product_prices}
+          product_images={item.product_images}
         />
       ))}
     </div>

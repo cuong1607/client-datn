@@ -38,9 +38,6 @@ const Product = () => {
   const { data: productDetail } = useQuery<any>(["detail", pid], () =>
     ProductService.getDetail(Number(pid))
   );
-  console.log("pid", pid);
-  const [showBlock, setShowBlock] = useState("description");
-  console.log("getDetail", productDetail);
   return (
     <Layout>
       <Breadcrumb />

@@ -19,7 +19,6 @@ const ForgotPassword = () => {
     const res = await postData(`${server}/login`, {
       phone: data.phone,
     });
-    console.log(res);
   };
 
   return (
