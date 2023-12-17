@@ -47,7 +47,6 @@ const ProductItem = ({
     dispatch(addProduct(productStore));
     Notification("success", "Thêm sản phẩm vào giỏ hàng thành công");
   };
-  console.log("currentPrice", price);
 
   return (
     <div className="product-item">

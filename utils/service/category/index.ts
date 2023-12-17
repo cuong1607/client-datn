@@ -30,4 +30,8 @@ export const ConfigSetting = {
     const url = `/size`;
     return AxiosClient.get(url, { params: { ...params, limit: 999 } });
   },
+  getBranch: (params: IQuery) => {
+    const url = `/branch`;
+    return AxiosClient.get(url, { params: { ...params, limit: 999 } });
+  },
 };

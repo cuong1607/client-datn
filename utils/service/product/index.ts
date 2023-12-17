@@ -12,7 +12,7 @@ export interface IQuery {
 export const ProductService = {
   get: (params: IQuery) => {
     const url = `/product`;
-    return AxiosClient.get(url, { params: { ...params, limit: 999 } });
+    return AxiosClient.get(url, { params: { ...params, limit: 8 } });
   },
   getDetail: (id: number) => {
     const url = `/product/${id}`;

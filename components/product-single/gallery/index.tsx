@@ -4,7 +4,6 @@ type GalleryProductType = {
 
 const Gallery = ({ images }: GalleryProductType) => {
   const featImage = images?.[0]?.path;
-  console.log("image?.path", images?.[0].path);
   return (
     <section className="product-gallery">
       <div className="product-gallery__thumbs">

@@ -13,7 +13,6 @@ const ProductsCarousel = ({ products }: ProductsCarouselType) => {
   const [slidesPerView, setSlidesPerView] = useState(2);
   const [centeredSlides, setCenteredSlides] = useState(false);
   const [spaceBetween, setSpaceBetween] = useState(30);
-  console.log(slidesPerView, centeredSlides, spaceBetween);
   useEffect(() => {
     updateWindowSize();
     window.addEventListener("resize", updateWindowSize);
@@ -37,27 +36,21 @@ const ProductsCarousel = ({ products }: ProductsCarouselType) => {
   }
 
   if (!products) return <div>Loading</div>;
-  console.log("products", products);
   // React.useEffect(() => {}, [products]);
   return (
     <div className="products-carousel">
-      {products?.map(
-        (item) => (
-          console.log("itemitemitemitem", item),
-          (
-            <ProductItem
-              id={item.id}
-              name={item.name}
-              price={currencyFormat(Number(item.price))}
-              color={item.color}
-              discount={item.discount}
-              currentPrice={currencyFormat(item.currentPrice)}
-              key={item.id}
-              product_images={item.product_images?.[0]?.path}
-            />
-          )
-        )
-      )}
+      {products?.map((item) => (
+        <ProductItem
+          id={item.id}
+          name={item.name}
+          price={currencyFormat(Number(item.price))}
+          color={item.color}
+          discount={item.discount}
+          currentPrice={currencyFormat(item.currentPrice)}
+          key={item.id}
+          product_images={item.product_images?.[0]?.path}
+        />
+      ))}
     </div>
   );
 };

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import List from "./list";
+import { Select } from "antd";
 
-const ProductsContent = () => {
+const ProductsContent = ({ product }: any) => {
   const [orderProductsOpen, setOrderProductsOpen] = useState(false);
 
   return (
@@ -23,24 +24,40 @@ const ProductsContent = () => {
           <div className="products__filter__select">
             <h4>Hiển thị sản phẩm: </h4>
             <div className="select-wrapper">
-              <select>
+              {/* <select>
                 <option>Phổ biến</option>
-              </select>
+              </select> */}
+              <Select
+                defaultValue="lucy"
+                style={{ width: 120 }}
+                options={[
+                  { value: "lucy", label: "Mới nhất" },
+                  { value: "ass", label: "Cũ nhất" },
+                ]}
+              />
             </div>
           </div>
           <div className="products__filter__select">
             <h4>Sắp xếp theo: </h4>
             <div className="select-wrapper">
-              <select>
+              {/* <select>
                 <option>Tăng - Giảm</option>
                 <option>Giảm - Tăng</option>
-              </select>
+              </select> */}
+              <Select
+                defaultValue="lucy"
+                style={{ width: 120 }}
+                options={[
+                  { value: "lucy", label: "Tăng - Giảm" },
+                  { value: "ass", label: "Giảm - Tăng" },
+                ]}
+              />
             </div>
           </div>
         </form>
       </div>
 
-      <List />
+      <List product={product} />
     </section>
   );
 };

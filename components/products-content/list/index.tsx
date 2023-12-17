@@ -1,19 +1,14 @@
 import ProductItem from "../../product-item";
 import ProductsLoading from "./loading";
 import { ProductTypeList } from "types";
-import { useQuery } from "react-query";
-import { ProductService } from "../../../utils/service/product";
+
 import { currencyFormat } from "utils";
 import React from "react";
-const initialFilterQuery = {};
-const ProductsContent = () => {
-  const [filterQuery, setFilterQuery] = React.useState<any>(initialFilterQuery);
-  const [page, setPage] = React.useState(1);
-  const { data: product, error } = useQuery<any>(
-    ["color", filterQuery, page],
-    () => ProductService.get({ page: page, ...filterQuery })
-  );
-  if (error) return <div>Failed to load users</div>;
+interface IProps {
+  product: any;
+}
+const ProductsContent = (props: IProps) => {
+  const { product } = props;
   return (
     <>
       {!product?.data && <ProductsLoading />}

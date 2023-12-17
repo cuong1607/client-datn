@@ -1,7 +1,4 @@
-import { useState } from "react";
-import productsColors from "./../../../utils/data/products-colors";
-import productsSizes from "./../../../utils/data/products-sizes";
-import CheckboxColor from "./../../products-filter/form-builder/checkbox-color";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { some } from "lodash";
 import { addProduct } from "store/reducers/cart";
@@ -9,6 +6,7 @@ import { toggleFavProduct } from "store/reducers/user";
 import { ProductType, ProductStoreType } from "types";
 import { RootState } from "store";
 import { currencyFormat } from "utils";
+import { Select, SelectProps } from "antd";
 
 type ProductContent = {
   product: ProductType;
@@ -17,12 +15,10 @@ type ProductContent = {
 const Content = ({ product }: ProductContent) => {
   const dispatch = useDispatch();
   const [count, setCount] = useState<number>(1);
+  const [minPrice, setMinPrice] = useState<number>(1);
+  const [maxnPrice, setMaxPrice] = useState<number>();
   const [color, setColor] = useState<string>("");
   const [itemSize, setItemSize] = useState<string>("");
-
-  const onColorSet = (e: string) => setColor(e);
-  const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
-    setItemSize(e.target.value);
 
   const { favProducts } = useSelector((state: RootState) => state.user);
   const isFavourite = some(
@@ -55,48 +51,60 @@ const Content = ({ product }: ProductContent) => {
 
     dispatch(addProduct(productStore));
   };
+  console.log("prodâsaauct", product);
+  const options: SelectProps["options"] = [];
+
+  React.useEffect(() => {
+    if (product?.product_prices) {
+      const minAmount = Math.min(
+        ...product?.product_prices.map((item) => parseInt(item.price)),
+        ...product?.product_prices.map((item) => parseInt(item.discount))
+      );
+      setMinPrice(minAmount);
+      // Lấy ra số tiền lớn nhất trong price và discount
+      const maxAmount = Math.max(
+        ...product?.product_prices.map((item) => parseInt(item.price)),
+        ...product?.product_prices.map((item) => parseInt(item.discount))
+      );
+      setMaxPrice(maxAmount);
+    }
+  }, [product]);
+  console.log("options", options);
 
   return (
     <section className="product-content">
       <div className="product-content__intro">
-        {/* <h5 className="product__id">Product ID:<br></br>{product.id}</h5> */}
         <span className="product-on-sale">Giảm giá</span>
         <h2 className="product__name">{product?.name}</h2>
 
         <div className="product__prices">
-          <h4>{currencyFormat(Number(product?.price))} VNĐ</h4>
-          {product?.discount && <span>${product?.price}</span>}
+          <h4 style={{ textDecorationLine: "line-through" }}>
+            {currencyFormat(Number(maxnPrice))} VNĐ
+          </h4>
+          {minPrice && (
+            <span style={{ color: "black" }}>
+              {currencyFormat(Number(minPrice))} VNĐ
+            </span>
+          )}
         </div>
       </div>
 
       <div className="product-content__filters">
         <div className="product-filter-item">
-          <h5>Màu sắc :</h5>
-          <div className="checkbox-color-wrapper">
-            {productsColors.map((type) => (
-              <CheckboxColor
-                key={type.id}
-                type={"radio"}
-                name="product-color"
-                color={type.color}
-                valueName={type.label}
-                onChange={onColorSet}
-              />
-            ))}
-          </div>
-        </div>
-        <div className="product-filter-item">
           <h5>
-            Kích thước: <strong>Xem kích thước</strong>
+            Màu sắc: <strong>Xem màu sắc</strong>
           </h5>
           <div className="checkbox-color-wrapper">
             <div className="select-wrapper">
-              <select onChange={onSelectChange}>
-                <option>Chọn kích thước</option>
-                {productsSizes.map((type) => (
-                  <option value={type.label}>{type.label}</option>
-                ))}
-              </select>
+              <Select
+                placeholder="Chọn màu sắc"
+                style={{ width: 200 }}
+                onChange={() => {}}
+                options={product?.product_prices?.map((it: any) => ({
+                  value: it?.id,
+                  label: it.color,
+                }))}
+              />
             </div>
           </div>
         </div>
