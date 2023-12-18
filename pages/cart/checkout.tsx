@@ -3,195 +3,177 @@ import { useSelector } from "react-redux";
 import CheckoutStatus from "../../components/checkout-status";
 import CheckoutItems from "../../components/checkout/items";
 import { RootState } from "store";
+import { Select } from "antd";
+import { currencyFormat } from "utils";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 const CheckoutPage = () => {
   const priceTotal = useSelector((state: RootState) => {
     const cartItems = state.cart.cartItems;
     let totalPrice = 0;
     if (cartItems.length > 0) {
-      cartItems.map((item) => (totalPrice += item.price * item.count));
+      cartItems.map((item) => (totalPrice += Number(item.price) * item.amount));
     }
 
     return totalPrice;
   });
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    // const res = await AuthService.login({
+    //   phone: data.phone,
+    //   password: data.password,
+    // });
+    // if (res?.status) {
+    //   LocalStorage.setToken(res?.data?.token);
+    //   Notification("success", "Đăng nhập thành công");
+    //   router.push("/");
+    // }
+  };
   return (
     <Layout>
       <section className="cart">
         <div className="container">
-          <div className="cart__intro">
-            <h3 className="cart__title">Shipping and Payment</h3>
-            <CheckoutStatus step="checkout" />
-          </div>
-
-          <div className="checkout-content">
-            <div className="checkout__col-6">
-              <div className="checkout__btns">
-                <button className="btn btn--rounded btn--yellow">Log in</button>
-                <button className="btn btn--rounded btn--border">
-                  Sign up
-                </button>
-              </div>
-
-              <div className="block">
-                <h3 className="block__title">Shipping information</h3>
-                <form className="form">
-                  <div className="form__input-row form__input-row--two">
-                    <div className="form__col">
-                      <input
-                        className="form__input form__input--sm"
-                        type="text"
-                        placeholder="Email"
-                      />
-                    </div>
-
-                    <div className="form__col">
-                      <input
-                        className="form__input form__input--sm"
-                        type="text"
-                        placeholder="Address"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="form__input-row form__input-row--two">
-                    <div className="form__col">
-                      <input
-                        className="form__input form__input--sm"
-                        type="text"
-                        placeholder="First name"
-                      />
-                    </div>
-
-                    <div className="form__col">
-                      <input
-                        className="form__input form__input--sm"
-                        type="text"
-                        placeholder="City"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="form__input-row form__input-row--two">
-                    <div className="form__col">
-                      <input
-                        className="form__input form__input--sm"
-                        type="text"
-                        placeholder="Last name"
-                      />
-                    </div>
-
-                    <div className="form__col">
-                      <input
-                        className="form__input form__input--sm"
-                        type="text"
-                        placeholder="Postal code / ZIP"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="form__input-row form__input-row--two">
-                    <div className="form__col">
-                      <input
-                        className="form__input form__input--sm"
-                        type="text"
-                        placeholder="Phone number"
-                      />
-                    </div>
-
-                    <div className="form__col">
-                      <div className="select-wrapper select-form">
-                        <select>
-                          <option>Country</option>
-                          <option value="USA">United States of America</option>
-                          <option value="Canada">Canada</option>
-                          <option value="Brazil">Brazil</option>
-                          <option value="Argentina">Argentina</option>
-                          <option value="France">France</option>
-                          <option value="Germany">Germany</option>
-                          <option value="England">England</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
+          <form className="form" onSubmit={handleSubmit(onSubmit as any)}>
+            <div className="cart__intro">
+              <h3 className="cart__title">Vận chuyển và thanh toán</h3>
+              <CheckoutStatus step="checkout" />
             </div>
 
-            <div className="checkout__col-4">
-              <div className="block">
-                <h3 className="block__title">Payment method</h3>
-                <ul className="round-options round-options--three">
-                  <li className="round-item">
-                    <img src="/images/logos/paypal.png" alt="Paypal" />
-                  </li>
-                  <li className="round-item">
-                    <img src="/images/logos/visa.png" alt="Paypal" />
-                  </li>
-                  <li className="round-item">
-                    <img src="/images/logos/mastercard.png" alt="Paypal" />
-                  </li>
-                  <li className="round-item">
-                    <img src="/images/logos/maestro.png" alt="Paypal" />
-                  </li>
-                  <li className="round-item">
-                    <img src="/images/logos/discover.png" alt="Paypal" />
-                  </li>
-                  <li className="round-item">
-                    <img src="/images/logos/ideal-logo.svg" alt="Paypal" />
-                  </li>
-                </ul>
+            <div className="checkout-content">
+              <div className="checkout__col-6">
+                <div className="checkout__btns">
+                  <button className="btn btn--rounded btn--yellow">
+                    Đăng nhập
+                  </button>
+                  <button className="btn btn--rounded btn--border">
+                    Đăng ký
+                  </button>
+                </div>
+
+                <div className="block">
+                  <h3 className="block__title">Thông tin nhận hàng</h3>
+                  <div className="form__input-row form__input-row--two">
+                    <div className="form__col">
+                      <input
+                        className="form__input form__input--sm"
+                        type="text"
+                        placeholder="Tên người nhận"
+                        {...register("name", { required: true })}
+                      />
+                      {errors.name && errors.name.type === "required" && (
+                        <p className="message message--error">
+                          Vui lòng nhập tên người nhận!
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="form__col">
+                      <input
+                        className="form__input form__input--sm"
+                        type="text"
+                        placeholder="Số điện thoại"
+                        {...register("phone", {
+                          required: true,
+                          pattern: /^\d{10}$/,
+                        })}
+                      />
+                      {errors.phone && errors.phone.type === "required" && (
+                        <p className="message message--error">
+                          Vui lòng nhập số điện thoại!
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="form__input-row form__input-row--two">
+                    <div className="form__col">
+                      <input
+                        className="form__input form__input--sm"
+                        type="text"
+                        placeholder="Tỉnh/Thành phố"
+                        {...register("tinh", { required: true })}
+                      />
+                      {errors.tinh && errors.tinh.type === "required" && (
+                        <p className="message message--error">
+                          Vui lòng chọn tỉnh/thành phố!
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="form__col">
+                      <input
+                        className="form__input form__input--sm"
+                        type="text"
+                        placeholder="Quận/Huyện"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form__input-row form__input-row--two">
+                    <div className="form__col">
+                      <input
+                        className="form__input form__input--sm"
+                        type="text"
+                        placeholder="Xã Phường"
+                      />
+                    </div>
+
+                    <div className="form__col">
+                      <input
+                        className="form__input form__input--sm"
+                        type="text"
+                        placeholder="Địa chỉ chi tiết"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="block">
-                <h3 className="block__title">Delivery method</h3>
-                <ul className="round-options round-options--two">
-                  <li className="round-item round-item--bg">
-                    <img src="/images/logos/inpost.svg" alt="Paypal" />
-                    <p>$20.00</p>
-                  </li>
-                  <li className="round-item round-item--bg">
-                    <img src="/images/logos/dpd.svg" alt="Paypal" />
-                    <p>$12.00</p>
-                  </li>
-                  <li className="round-item round-item--bg">
-                    <img src="/images/logos/dhl.svg" alt="Paypal" />
-                    <p>$15.00</p>
-                  </li>
-                  <li className="round-item round-item--bg">
-                    <img src="/images/logos/maestro.png" alt="Paypal" />
-                    <p>$10.00</p>
-                  </li>
-                </ul>
+              <div className="checkout__col-3">
+                <div className="block">
+                  <h3 className="block__title">Hình thức thanh toán</h3>
+                  <Select
+                    defaultValue="1"
+                    style={{ width: 250 }}
+                    options={[
+                      { value: "1", label: "Thanh toán khi nhận hàng" },
+                      { value: "2", label: "Chuyển khoản" },
+                    ]}
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="checkout__col-2">
-              <div className="block">
-                <h3 className="block__title">Your cart</h3>
-                <CheckoutItems />
+              <div className="checkout__col-4">
+                <div className="block">
+                  <h3 className="block__title">Đơn hàng của bạn</h3>
+                  <CheckoutItems />
 
-                <div className="checkout-total">
-                  <p>Total cost</p>
-                  <h3>${priceTotal}</h3>
+                  <div className="checkout-total">
+                    <p>Tổng tiền</p>
+                    <h3>{currencyFormat(priceTotal)}VNĐ</h3>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="cart-actions cart-actions--checkout">
-            <a href="/cart" className="cart__btn-back">
-              <i className="icon-left"></i> Back
-            </a>
-            <div className="cart-actions__items-wrapper">
-              <button type="button" className="btn btn--rounded btn--border">
-                Continue shopping
-              </button>
-              <button type="button" className="btn btn--rounded btn--yellow">
-                Proceed to payment
-              </button>
+            <div className="cart-actions cart-actions--checkout">
+              <a href="/cart" className="cart__btn-back">
+                <i className="icon-left"></i> Quay lại
+              </a>
+              <div className="cart-actions__items-wrapper">
+                <button type="button" className="btn btn--rounded btn--border">
+                  Tiếp tục mua sắm
+                </button>
+                <button type="submit" className="btn btn--rounded btn--yellow">
+                  Tiến hành đặt hàng
+                </button>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </section>
     </Layout>

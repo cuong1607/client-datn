@@ -3,7 +3,6 @@ import ProductItem from "./../../product-item";
 import React from "react";
 // import Swiper core and required components
 import { useEffect, useState } from "react";
-import { currencyFormat } from "utils";
 
 type ProductsCarouselType = {
   products: ProductTypeList[];
@@ -18,8 +17,7 @@ const ProductsCarousel = ({ products }: ProductsCarouselType) => {
     window.addEventListener("resize", updateWindowSize);
     return () => window.removeEventListener("resize", updateWindowSize);
   }, []);
-  console.log('ProductsCarousel', products);
-  
+
   function updateWindowSize() {
     if (window.innerWidth > 768) {
       setSlidesPerView(3);
@@ -44,10 +42,6 @@ const ProductsCarousel = ({ products }: ProductsCarouselType) => {
         <ProductItem
           id={item.id}
           name={item.name}
-          price={currencyFormat(Number(item.price))}
-          color={item.color}
-          discount={item.discount}
-          currentPrice={currencyFormat(item.currentPrice)}
           key={item.id}
           product_prices={item?.product_prices}
           product_images={item.product_images}

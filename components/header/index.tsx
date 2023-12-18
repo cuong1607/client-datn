@@ -39,7 +39,6 @@ const Header = ({ isErrorPage }: HeaderType) => {
     if (!arrayPaths.includes(router.pathname) || isErrorPage) {
       return;
     }
-
     headerClass();
     window.onscroll = function () {
       headerClass();
@@ -64,7 +63,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
         <Link href="/">
           <h1 style={{ height: "15px" }} className="site-logo">
             <Logo />
-            {/* E-Shop */}
+            MẮT KÍNH CỘNG ĐỒNG
           </h1>
         </Link>
         <nav

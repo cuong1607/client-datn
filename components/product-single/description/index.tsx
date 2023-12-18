@@ -1,28 +1,17 @@
-type ProductDescriptionType = {
-  show: boolean;
-}
-
-const Description = ({ show }: ProductDescriptionType) => {
-  const style = {
-    display: show ? 'flex' : 'none',
-  }
-
+const Description = () => {
   return (
-    <section style={style} className="product-single__description">
+    <section className="product-single__description">
       <div className="product-description-block">
         <i className="icon-cart"></i>
         <h4>Thông tin chi tiết và mô tả sản phẩm</h4>
-        <p>Áo phông trắng Summer Vibes thuộc dòng uiKit với hình in đầy màu sắc. <br></br>MĐược làm bằng bông jersey. Áo phông hoàn toàn phù hợp với quần jean, quần dài hoặc quần short.</p>
-        
-      </div>
-      <div className="product-description-block">
-        <i className="icon-cart"></i>
-        <h4>Thông tin chi tiết và mô tả sản phẩm</h4>
-        <p>Áo phông trắng Summer Vibes thuộc dòng uiKit với hình in đầy màu sắc. <br></br>MĐược làm bằng bông jersey. Áo phông hoàn toàn phù hợp với quần jean, quần dài hoặc quần short.</p>
+        <p style={{ textAlign: "center" }}>
+          Áo phông trắng Summer Vibes thuộc dòng uiKit với hình in đầy màu sắc.{" "}
+          <br></br>MĐược làm bằng bông jersey. Áo phông hoàn toàn phù hợp với
+          quần jean, quần dài hoặc quần short.
+        </p>
       </div>
     </section>
   );
 };
-  
+
 export default Description;
-    

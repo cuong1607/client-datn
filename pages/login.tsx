@@ -4,6 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { AuthService } from "../utils/service/auth";
 import { Notification } from "utils";
 import { useRouter } from "next/router";
+import LocalStorage from "utils/LocalStorage";
 
 type FormValues = {
   phone: string;
@@ -26,6 +27,7 @@ const LoginPage = () => {
       password: data.password,
     });
     if (res?.status) {
+      LocalStorage.setToken(res?.data?.token);
       Notification("success", "Đăng nhập thành công");
       router.push("/");
     }

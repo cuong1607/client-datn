@@ -25,7 +25,7 @@ const RegisterPage = () => {
       password: data?.password,
     });
     if (res?.status) {
-      Notification("success", "Đăng nhập thành công");
+      Notification("success", "Đăng ký thành công");
       router.push("/login");
     }
   };

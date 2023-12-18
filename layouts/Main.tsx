@@ -9,7 +9,7 @@ type LayoutType = {
   children?: React.ReactNode;
 };
 
-export default ({ children, title = "Next.js Ecommerce" }: LayoutType) => {
+export default ({ children, title = "Mat kinh cong dong" }: LayoutType) => {
   const { theme } = useContext(ThemeContext);
 
   const router = useRouter();

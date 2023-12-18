@@ -7,12 +7,9 @@ const Footer = () => {
         <div className="site-footer__top">
           <div className="site-footer__description">
             <h6>
-              <Logo /> <span>E</span>-Shop
+              <Logo /> <span>M</span>-MẮT KÍNH CỘNG ĐỒNG
             </h6>
-            <p>
-              House My Brand designs clothing for the young, the old & everyone
-              in between – but most importantly, for the fashionable
-            </p>
+            <p>Kính mắt cộng đồng - Mang tầm nhìn đến vẻ đẹp không gian</p>
             <ul className="site-footer__social-networks">
               <li>
                 <a href="#">
@@ -80,12 +77,12 @@ const Footer = () => {
               </li>
             </ul>
             <ul>
-              <li>Contact</li>
+              <li>LIÊN HỆ</li>
               <li>
-                <a href="#">whitehorse9021@gmail.com</a>
+                <a href="#">matkinhcongdong@gmail.com</a>
               </li>
               <li>
-                <a href="#">Hotline: +1 214-717-4816</a>
+                <a href="#">Hotline: 0378 079 461</a>
               </li>
             </ul>
           </div>
@@ -94,7 +91,7 @@ const Footer = () => {
 
       <div className="site-footer__bottom">
         <div className="container">
-          <p>DESIGN BY WHITEHORSE - © 2023. ALL RIGHTS RESERVED.</p>
+          <p>MAT KINH CONG DONG - © 2023. CỬA SỔ CHO PHONG CÁCH VÀ TẦM NHÌN.</p>
         </div>
       </div>
     </footer>

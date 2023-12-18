@@ -1,16 +1,13 @@
+import { ProductTypeList } from "types";
 import ProductItem from "../../product-item";
 import ProductsLoading from "./loading";
-import { ProductTypeList } from "types";
 
-import { currencyFormat } from "utils";
-import React from "react";
 interface IProps {
   product: any;
 }
 const ProductsContent = (props: IProps) => {
   const { product } = props;
-  console.log('productItem', product);
-  
+
   return (
     <>
       {!product?.data && <ProductsLoading />}
@@ -21,13 +18,9 @@ const ProductsContent = (props: IProps) => {
             <ProductItem
               id={item.id}
               name={item.name}
-              price={currencyFormat(Number(item.price))}
-              color={item.color}
-              currentPrice={currencyFormat(Number(item.price))}
               key={item.id}
               product_images={item?.product_images}
               product_prices={item?.product_prices}
-              item={item}
             />
           ))}
         </section>

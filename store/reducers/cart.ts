@@ -1,31 +1,30 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ProductStoreType } from 'types';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ProductStoreType } from "types";
 
 interface CartTypes {
-  cartItems: ProductStoreType[]
+  cartItems: ProductStoreType[];
 }
 
-const initialState = { 
-  cartItems: [] 
+const initialState = {
+  cartItems: [],
 } as CartTypes;
 
 const indexSameProduct = (state: CartTypes, action: ProductStoreType) => {
-  const sameProduct = (product: ProductStoreType) => (
-    product.id === action.id && 
-    product.color === action.color && 
-    product.size === action.size
-  );
+  console.log("action", action);
 
-  return state.cartItems.findIndex(sameProduct)
+  const sameProduct = (product: ProductStoreType) =>
+    product.id === action.id && product.color === action.color;
+
+  return state.cartItems.findIndex(sameProduct);
 };
 
 type AddProductType = {
-  product: ProductStoreType,
-  count: number,
-}
+  product: ProductStoreType;
+  amount: number;
+};
 
 const cartSlice = createSlice({
-  name: 'cart',
+  name: "cart",
   initialState,
   reducers: {
     addProduct: (state, action: PayloadAction<AddProductType>) => {
@@ -34,14 +33,14 @@ const cartSlice = createSlice({
       // find index of product
       const index = indexSameProduct(state, action.payload.product);
 
-      if(index !== -1) {
-        cartItems[index].count += action.payload.count;
+      if (index !== -1) {
+        cartItems[index].amount += action.payload.amount;
         return;
       }
 
       return {
         ...state,
-        cartItems: [...state.cartItems, action.payload.product ]
+        cartItems: [...state.cartItems, action.payload.product],
       };
     },
     removeProduct(state, action: PayloadAction<ProductStoreType>) {
@@ -51,10 +50,10 @@ const cartSlice = createSlice({
     setCount(state, action: PayloadAction<AddProductType>) {
       // find index and add new count on product count
       const indexItem = indexSameProduct(state, action.payload.product);
-      state.cartItems[indexItem].count = action.payload.count;
+      state.cartItems[indexItem].amount = action.payload.amount;
     },
   },
-})
+});
 
-export const { addProduct, removeProduct, setCount } = cartSlice.actions
-export default cartSlice.reducer
+export const { addProduct, removeProduct, setCount } = cartSlice.actions;
+export default cartSlice.reducer;

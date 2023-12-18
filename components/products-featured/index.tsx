@@ -8,18 +8,16 @@ const ProductsFeatured = () => {
   const {
     query: { pid },
   } = router;
-  // const [page, setPage] = React.useState<number>(1);
-  // const [filterQuery, setFilterQuery] = React.useState<any>(initialFilterQuery);
   const { data: product } = useQuery<any>(["product", pid], () =>
     ProductService.get({ page: 1, limit: 8 })
   );
-  console.log('productproduct', product);
-  
+  console.log("productproduct", product);
+
   return (
     <section className="section section-products-featured">
       <div className="container">
         <header className="section-products-featured__header">
-          <h3>BỘ SƯU TẬP NỔI BẬT</h3>
+          <h3>CÁC SẢN PHẨM LIÊN QUAN</h3>
           <a
             href="/products"
             className="btn btn--rounded btn--border hvr-float-shadow"

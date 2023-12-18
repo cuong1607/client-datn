@@ -1,75 +1,75 @@
-import { useSelector } from 'react-redux';
-import CheckoutStatus from '../../components/checkout-status';
-import Item from './item';
-import { RootState } from 'store';
-
+import { useSelector } from "react-redux";
+import { RootState } from "store";
+import CheckoutStatus from "../../components/checkout-status";
+import Item from "./item";
+import { currencyFormat } from "utils";
 const ShoppingCart = () => {
-  const { cartItems } = useSelector((state: RootState)  => state.cart);
+  const { cartItems } = useSelector((state: RootState) => state.cart);
 
   const priceTotal = () => {
     let totalPrice = 0;
-    if(cartItems.length > 0) {
-      cartItems.map(item => totalPrice += item.price * item.count);
+    if (cartItems.length > 0) {
+      cartItems.map((item) => (totalPrice += Number(item.price) * item.amount));
     }
 
-    return totalPrice;
-  }
+    return currencyFormat(totalPrice);
+  };
+  console.log("cartItems", cartItems);
 
   return (
     <section className="cart">
       <div className="container">
         <div className="cart__intro">
-          <h3 className="cart__title">Shopping Cart</h3>
+          <h3 className="cart__title">Giỏ hàng</h3>
           <CheckoutStatus step="cart" />
         </div>
 
         <div className="cart-list">
-          {cartItems.length > 0 &&
+          {cartItems.length > 0 && (
             <table>
               <tbody>
                 <tr>
-                  <th style={{textAlign: 'left'}}>Product</th>
-                  <th>Color</th>
-                  <th>Size</th>
-                  <th>Ammount</th>
-                  <th>Price</th>
+                  <th style={{ textAlign: "left" }}>Sản phẩm</th>
+                  <th>Màu sắc</th>
+                  <th>Số lượng</th>
+                  <th>Tổng tiền</th>
                   <th></th>
                 </tr>
 
-                {cartItems.map(item => (
-                  <Item 
+                {cartItems.map((item) => (
+                  <Item
+                    product_images={item?.product_images}
                     key={item.id}
                     id={item.id}
-                    thumb={item.thumb}
                     name={item.name}
                     color={item.color}
                     price={item.price}
-                    size={item.size}
-                    count={item.count}
+                    amount={item.amount}
                   />
                 ))}
               </tbody>
-            </table> 
-          } 
-          
-          {cartItems.length === 0 && 
-            <p>Nothing in the cart</p>
-          }
-        </div>
-      
-        <div className="cart-actions">
-          <a href="/products" className="cart__btn-back"><i className="icon-left"></i> Continue Shopping</a>
-          <input type="text" placeholder="Promo Code" className="cart__promo-code" />
+            </table>
+          )}
 
+          {cartItems.length === 0 && <p>Không có sản phẩm trong giỏ hàng!</p>}
+        </div>
+
+        <div className="cart-actions">
+          <a href="/products" className="cart__btn-back">
+            <i className="icon-left"></i> Tiếp tục mua hàng
+          </a>
           <div className="cart-actions__items-wrapper">
-            <p className="cart-actions__total">Total cost <strong>${priceTotal().toFixed(2)}</strong></p>
-            <a href="/cart/checkout" className="btn btn--rounded btn--yellow">Checkout</a>
+            <p className="cart-actions__total">
+              Tổng tiền <strong>{priceTotal()}VNĐ</strong>
+            </p>
+            <a href="/cart/checkout" className="btn btn--rounded btn--yellow">
+              Thanh toán
+            </a>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 };
 
-  
-export default ShoppingCart
+export default ShoppingCart;

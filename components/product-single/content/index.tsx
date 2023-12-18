@@ -5,8 +5,8 @@ import { addProduct } from "store/reducers/cart";
 import { toggleFavProduct } from "store/reducers/user";
 import { ProductType, ProductStoreType } from "types";
 import { RootState } from "store";
-import { currencyFormat } from "utils";
-import { Select, SelectProps } from "antd";
+import { Notification, currencyFormat } from "utils";
+import { Select } from "antd";
 
 type ProductContent = {
   product: ProductType;
@@ -14,11 +14,11 @@ type ProductContent = {
 
 const Content = ({ product }: ProductContent) => {
   const dispatch = useDispatch();
-  const [count, setCount] = useState<number>(1);
+  const [amount, setCount] = useState<number>(1);
   const [minPrice, setMinPrice] = useState<number>(1);
   const [maxnPrice, setMaxPrice] = useState<number>();
-  const [color, setColor] = useState<string>("");
-  const [itemSize, setItemSize] = useState<string>("");
+  const [itemColor, setItemColor] = useState<number>();
+  const [itemProduct, setItemProduct] = useState<any[]>();
 
   const { favProducts } = useSelector((state: RootState) => state.user);
   const isFavourite = some(
@@ -33,25 +33,33 @@ const Content = ({ product }: ProductContent) => {
       })
     );
   };
+  console.log("itemProduct", itemProduct);
+  console.log("product", product);
+
   const addToCart = () => {
-    const productToSave: ProductStoreType = {
-      id: product.id,
-      name: product.name,
-      thumb: product.images ? product.images[0] : "",
-      price: Number(product.price),
-      count: count,
-      color: color,
-      size: itemSize,
-    };
+    if (itemColor && itemProduct?.length) {
+      const productToSave: ProductStoreType = {
+        id: itemProduct[0].id,
+        name: product.name,
+        product_images: product?.product_images,
+        // product_prices: product?.product_prices,
+        amount: amount,
+        price: minPrice,
+        color: itemProduct[0].color,
+      };
 
-    const productStore = {
-      count,
-      product: productToSave,
-    };
+      const productStore = {
+        amount,
+        product: productToSave,
+      };
+      console.log("productToSave", productToSave);
 
-    dispatch(addProduct(productStore));
+      dispatch(addProduct(productStore));
+      Notification("success", "Thêm vào giỏ hàng thành công");
+    } else {
+      Notification("warning", "Vui lòng chọn màu sắc của sản phẩm");
+    }
   };
-  const options: SelectProps["options"] = [];
 
   React.useEffect(() => {
     if (product?.product_prices) {
@@ -68,6 +76,17 @@ const Content = ({ product }: ProductContent) => {
       setMaxPrice(maxAmount);
     }
   }, [product]);
+
+  React.useEffect(() => {
+    if (itemColor) {
+      const discountColor: any = product?.product_prices?.filter(
+        (item: any) => item.id === Number(itemColor)
+      );
+      setMinPrice(Number(discountColor[0].discount));
+      setMaxPrice(Number(discountColor[0].price));
+      setItemProduct(discountColor);
+    }
+  }, [itemColor]);
 
   return (
     <section className="product-content">
@@ -97,7 +116,9 @@ const Content = ({ product }: ProductContent) => {
               <Select
                 placeholder="Chọn màu sắc"
                 style={{ width: 200 }}
-                onChange={() => {}}
+                onChange={(value) => {
+                  setItemColor(value);
+                }}
                 options={product?.product_prices?.map((it: any) => ({
                   value: it?.id,
                   label: it.color,
@@ -111,16 +132,17 @@ const Content = ({ product }: ProductContent) => {
           <div className="quantity-buttons">
             <div className="quantity-button">
               <button
+                disabled={amount === 1 ? true : false}
                 type="button"
-                onClick={() => setCount(count - 1)}
+                onClick={() => setCount(amount - 1)}
                 className="quantity-button__btn"
               >
                 -
               </button>
-              <span>{count}</span>
+              <span>{amount}</span>
               <button
                 type="button"
-                onClick={() => setCount(count + 1)}
+                onClick={() => setCount(amount + 1)}
                 className="quantity-button__btn"
               >
                 +

@@ -19,37 +19,32 @@ export type ReviewType = {
 export type ProductType = {
   id: string;
   name: string;
-  thumb: string;
   price: string;
-  count: number;
+  amount: number;
   color: string;
-  size: string;
-  images: string[];
   discount?: string;
-  currentPrice: number;
-  product_prices: any[];
+  product_prices?: any[];
+  product_images: Image[] | undefined;
 };
+interface Image {
+  path: string;
+}
 
 export type ProductTypeList = {
   id: string;
   name: string;
-  price: string;
-  color: string;
   product_images: any;
   product_prices: any[];
-  discount?: string;
-  currentPrice?: any;
-  item?: any;
 };
 
 export type ProductStoreType = {
   id: string;
   name: string;
-  thumb: string;
-  price: number;
-  count: number;
-  color: string;
-  size: string;
+  color?: string;
+  price?: number;
+  amount: number;
+  product_images?: Image[];
+  product_prices?: any[];
 };
 
 export type GtagEventType = {

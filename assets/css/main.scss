@@ -1814,9 +1814,9 @@ h5 {
     margin-bottom: 170px;
   }
   .product-single__description {
-    max-width: 938px;
+    max-width: 100%;
     margin: 0 auto;
-    flex-wrap: wrap;
+    justify-content: center;
     @include breakpoint(phone) {
       display: flex;
       justify-content: space-between;
@@ -1826,7 +1826,7 @@ h5 {
       width: 100%;
       margin-bottom: 60px;
       @include breakpoint(phone) {
-        width: 48%;
+        width: 100%;
         margin-bottom: 0;
       }
       i {
@@ -1886,18 +1886,6 @@ h5 {
   }
   .product-content {
     flex: 1;
-  }
-  .product-single__reviews {
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    .reviews-list {
-      width: 100%;
-      margin-left: auto;
-      @include breakpoint(tablet-lg) {
-        width: 48%;
-      }
-    }
   }
   .product-single__info {
     .product-single__info-btns {

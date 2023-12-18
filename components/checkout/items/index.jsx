@@ -1,23 +1,25 @@
 import { useSelector } from 'react-redux';
+import { currencyFormat } from 'utils';
 
 const CheckoutItems = () => {
   const { cartItems } = useSelector(state => state.cart);
-
+  console.log('cartItems', cartItems);
   return (
     <ul className="checkout-items">
       {cartItems.map(item => (
         <li className="checkout-item">
           <div className="checkout-item__content">
             <div className="checkout-item__img">
-              <img src={item.thumb} />
+              <img src={item.product_images[0].path} />
             </div>
 
             <div className="checkout-item__data">
               <h3>{item.name}</h3>
+              <p>Số lượng: {item.amount}</p>
               <span>#{item.id}</span>
             </div>
           </div>
-          <h3>${item.price}</h3>
+          <h3>{currencyFormat(item.price)}VNĐ</h3>
         </li>
       ))}
     </ul>
