@@ -37,7 +37,6 @@ const cartSlice = createSlice({
         cartItems[index].amount += action.payload.amount;
         return;
       }
-
       return {
         ...state,
         cartItems: [...state.cartItems, action.payload.product],
@@ -52,8 +51,16 @@ const cartSlice = createSlice({
       const indexItem = indexSameProduct(state, action.payload.product);
       state.cartItems[indexItem].amount = action.payload.amount;
     },
+    removeProductAll: (state, action: PayloadAction<AddProductType[]>) => {
+      const productsToRemove = action.payload;
+      state.cartItems = state.cartItems.filter(
+        (item: any) => !productsToRemove.includes(item)
+      );
+      console.log("state", state);
+    },
   },
 });
 
-export const { addProduct, removeProduct, setCount } = cartSlice.actions;
+export const { addProduct, removeProduct, setCount, removeProductAll } =
+  cartSlice.actions;
 export default cartSlice.reducer;

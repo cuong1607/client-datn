@@ -3,7 +3,6 @@ import { currencyFormat } from 'utils';
 
 const CheckoutItems = () => {
   const { cartItems } = useSelector(state => state.cart);
-  console.log('cartItems', cartItems);
   return (
     <ul className="checkout-items">
       {cartItems.map(item => (

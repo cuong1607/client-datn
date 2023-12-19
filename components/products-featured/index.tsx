@@ -11,7 +11,6 @@ const ProductsFeatured = () => {
   const { data: product } = useQuery<any>(["product", pid], () =>
     ProductService.get({ page: 1, limit: 8 })
   );
-  console.log("productproduct", product);
 
   return (
     <section className="section section-products-featured">
