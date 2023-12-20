@@ -51,12 +51,9 @@ const cartSlice = createSlice({
       const indexItem = indexSameProduct(state, action.payload.product);
       state.cartItems[indexItem].amount = action.payload.amount;
     },
-    removeProductAll: (state, action: PayloadAction<AddProductType[]>) => {
-      const productsToRemove = action.payload;
-      state.cartItems = state.cartItems.filter(
-        (item: any) => !productsToRemove.includes(item)
-      );
-      console.log("state", state);
+    removeProductAll: (state) => {
+      console.log('log', state);
+      state.cartItems = [];
     },
   },
 });

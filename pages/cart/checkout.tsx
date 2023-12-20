@@ -58,7 +58,7 @@ const CheckoutPage = () => {
     });
     if (res?.status) {
       Notification("success", "Mua hàng thành công");
-      dispatch(removeProductAll);
+      dispatch(removeProductAll());
       router.push("/");
     }
   };
