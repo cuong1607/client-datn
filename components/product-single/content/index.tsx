@@ -7,6 +7,8 @@ import { ProductType, ProductStoreType } from "types";
 import { RootState } from "store";
 import { Notification, currencyFormat } from "utils";
 import { Select } from "antd";
+import LocalStorage from "utils/LocalStorage";
+import { CartService } from "../../../utils/service/cart";
 
 type ProductContent = {
   product: ProductType;
@@ -36,26 +38,47 @@ const Content = ({ product }: ProductContent) => {
   console.log("itemProduct", itemProduct);
   console.log("product", product);
 
-  const addToCart = () => {
+  const addToCart = async () => {
     if (itemColor && itemProduct?.length) {
-      const productToSave: ProductStoreType = {
-        id: itemProduct[0].id,
-        name: product.name,
-        product_images: product?.product_images,
-        // product_prices: product?.product_prices,
-        amount: amount,
-        price: minPrice,
-        color: itemProduct[0].color,
-      };
+      if (LocalStorage?.getToken()) {
+        const productToSave: ProductStoreType = {
+          id: itemProduct[0].id,
+          name: product.name,
+          product_images: product?.product_images,
+          // product_prices: product?.product_prices,
+          amount: amount,
+          price: minPrice,
+          color: itemProduct[0].color,
+        };
+        const productStore = {
+          quantity: productToSave.amount,
+          product_price_id: Number(productToSave.id),
+        };
+        await CartService.cart(productStore).then((res) => {
+          if (res.status) {
+            Notification("success", "Thêm vào giỏ hàng thành công");
+          }
+        });
+      } else {
+        const productToSave: ProductStoreType = {
+          id: itemProduct[0].id,
+          name: product.name,
+          product_images: product?.product_images,
+          // product_prices: product?.product_prices,
+          amount: amount,
+          price: minPrice,
+          color: itemProduct[0].color,
+        };
 
-      const productStore = {
-        amount,
-        product: productToSave,
-      };
-      console.log("productToSave", productToSave);
+        const productStore = {
+          amount,
+          product: productToSave,
+        };
+        console.log("productToSave", productToSave);
 
-      dispatch(addProduct(productStore));
-      Notification("success", "Thêm vào giỏ hàng thành công");
+        dispatch(addProduct(productStore));
+        Notification("success", "Thêm vào giỏ hàng thành công");
+      }
     } else {
       Notification("warning", "Vui lòng chọn màu sắc của sản phẩm");
     }

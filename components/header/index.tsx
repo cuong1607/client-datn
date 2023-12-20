@@ -7,7 +7,8 @@ import { useRouter } from "next/router";
 import { RootState } from "store";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { ThemeContext } from "components/context/theme-context";
-
+import { LogoutOutlined } from "@ant-design/icons";
+import LocalStorage from "utils/LocalStorage";
 type HeaderType = {
   isErrorPage?: Boolean;
 };
@@ -98,7 +99,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
         </nav>
 
         <div className="site-header__actions">
-          <button
+          {/* <button
             ref={searchRef}
             className={`search-form-wrapper ${
               searchOpen ? "search-form--active" : ""
@@ -119,7 +120,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
               onClick={() => setSearchOpen(!searchOpen)}
               className="icon-search"
             ></i>
-          </button>
+          </button> */}
           <DarkModeSwitch
             className="dark-toggle"
             checked={theme === "light" ? false : true}
@@ -136,11 +137,27 @@ const Header = ({ isErrorPage }: HeaderType) => {
               )}
             </button>
           </Link>
-          <Link href="/login" legacyBehavior>
-            <button className="site-header__btn-avatar">
-              <i className="icon-avatar"></i>
+          {LocalStorage.getToken() ? (
+            <button
+              onClick={() => {
+                LocalStorage.removeToken();
+                router.push("/login");
+                setTimeout(() => {
+                  window.location.reload();
+                }, 1500);
+              }}
+              className="site-header__btn-avatar"
+            >
+              <i className="icon-right"></i>
             </button>
-          </Link>
+          ) : (
+            <Link href="/login" legacyBehavior>
+              <button className="site-header__btn-avatar">
+                <i className="icon-avatar"></i>
+              </button>
+            </Link>
+          )}
+
           <button
             onClick={() => setMenuOpen(true)}
             className="site-header__btn-menu"

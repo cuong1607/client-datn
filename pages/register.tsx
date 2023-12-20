@@ -4,6 +4,8 @@ import Link from "next/link";
 import { AuthService } from "../utils/service/auth";
 import { Notification } from "utils";
 import { useRouter } from "next/router";
+import LocalStorage from "utils/LocalStorage";
+import React from "react";
 type FormValues = {
   full_name: string;
   phone: string;
@@ -29,6 +31,11 @@ const RegisterPage = () => {
       router.push("/login");
     }
   };
+  React.useEffect(() => {
+    if (LocalStorage.getToken()) {
+      router.push("/");
+    }
+  }, []);
   return (
     <Layout>
       <section className="form-page">

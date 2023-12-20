@@ -114,6 +114,10 @@
 .icon-left:before {
   content: '\e80b';
 }
+/* '' */
+.icon-logout:before {
+  content: '\e63a';
+}
 
 /* '' */
 .icon-happy:before {

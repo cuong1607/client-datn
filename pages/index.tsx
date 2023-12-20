@@ -1,11 +1,10 @@
-import Layout from "../layouts/Main";
+import Footer from "../components/footer";
 import PageIntro from "../components/page-intro";
 import ProductsFeatured from "../components/products-featured";
-import Footer from "../components/footer";
 import Subscribe from "../components/subscribe";
+import Layout from "../layouts/Main";
 
 const IndexPage = () => {
-  // const priceTotal = useSelector(state);
   return (
     <Layout>
       <PageIntro />

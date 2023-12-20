@@ -5,6 +5,7 @@ import { AuthService } from "../utils/service/auth";
 import { Notification } from "utils";
 import { useRouter } from "next/router";
 import LocalStorage from "utils/LocalStorage";
+import React from "react";
 
 type FormValues = {
   phone: string;
@@ -20,7 +21,13 @@ const LoginPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  console.log("router.asPath", router.asPath);
 
+  React.useEffect(() => {
+    if (LocalStorage.getToken()) {
+      router.push("/");
+    }
+  }, []);
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const res = await AuthService.login({
       phone: data.phone,
