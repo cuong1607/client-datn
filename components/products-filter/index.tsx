@@ -34,9 +34,12 @@ const ProductsFilter = ({
           <div className="products-filter__block__content">
             <CheckBoxComponent
               onChange={(item: any) => {
-                returnFilter({ category_id: item[0] });
-                // const arr = item.map((it: any) => it);
-                // returnFilter({ age_group_ids: arr.join(", ") || "" });
+                const arr = item.map((it: any) => it);
+                if (arr?.length) {
+                  returnFilter({ category_id: arr.join(", ") || "" });
+                } else {
+                  returnFilter({ category_id: null });
+                }
               }}
               apiUrl="/category"
             />
@@ -51,6 +54,7 @@ const ProductsFilter = ({
               max={5000000}
               defaultValue={[50000, 1000000]}
               onChange={(value) => {
+                console.log("valuetien, value", value);
               }}
               tipFormatter={(value) => `${currencyFormat(value)}đ`}
             />
@@ -64,7 +68,7 @@ const ProductsFilter = ({
               <CheckBoxComponent
                 onChange={(item: any) => {
                   const arr = item.map((it: any) => it);
-                  if(arr?.length){
+                  if (arr?.length) {
                     returnFilter({ color_ids: arr.join(", ") || "" });
                   } else {
                     returnFilter({ color_ids: null });
@@ -80,9 +84,12 @@ const ProductsFilter = ({
           <div className="products-filter__block__content">
             <CheckBoxComponent
               onChange={(item: any) => {
-
-                // const arr = item.map((it: any) => it);
-                // returnFilter({ age_group_ids: arr.join(", ") || "" });
+                const arr = item.map((it: any) => it);
+                if (arr?.length) {
+                  returnFilter({ branch_id: arr.join(", ") || "" });
+                } else {
+                  returnFilter({ branch_id: null });
+                }
               }}
               apiUrl="/branch"
             />

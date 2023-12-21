@@ -63,7 +63,7 @@ const ProductItem = ({
           />
           {minPrice && (
             <span className="product__discount">
-              {currencyFormat(minPrice)} VNĐ
+              {/* {currencyFormat(minPrice)} VNĐ */}Giảm giá
             </span>
           )}
         </Link>

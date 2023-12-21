@@ -2,13 +2,19 @@ import { useState } from "react";
 import List from "./list";
 import { Select } from "antd";
 
-const ProductsContent = ({ product }: any) => {
+const ProductsContent = ({
+  product,
+  returnFilter,
+}: {
+  product: any;
+  returnFilter: (filter: any) => void;
+}) => {
   const [orderProductsOpen, setOrderProductsOpen] = useState(false);
 
   return (
     <section className="products-content">
       <div className="products-content__intro">
-        <h2>Kính thời trang</h2>
+        <h2>Danh sách kính</h2>
         <button
           type="button"
           onClick={() => setOrderProductsOpen(!orderProductsOpen)}
@@ -25,11 +31,16 @@ const ProductsContent = ({ product }: any) => {
             <h4>Hiển thị sản phẩm: </h4>
             <div className="select-wrapper">
               <Select
-                defaultValue="lucy"
+                defaultValue="asc"
                 style={{ width: 120 }}
+                onChange={(value) => {
+                  console.log("value", value);
+
+                  returnFilter({ order: value });
+                }}
                 options={[
-                  { value: "lucy", label: "Mới nhất" },
-                  { value: "ass", label: "Cũ nhất" },
+                  { value: "asc", label: "Mới nhất" },
+                  { value: "desc", label: "Cũ nhất" },
                 ]}
               />
             </div>

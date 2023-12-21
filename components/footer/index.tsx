@@ -41,39 +41,36 @@ const Footer = () => {
 
           <div className="site-footer__links">
             <ul>
-              <li>Shopping online</li>
+              <li>Mua sắm online</li>
               <li>
-                <a href="#">Order Status</a>
+                <a href="#">Trạng thái mua hàng</a>
               </li>
               <li>
-                <a href="#">Shipping and Delivery</a>
+                <a href="#">Vận chuyển và giao hàng</a>
               </li>
               <li>
-                <a href="#">Returns</a>
+                <a href="#">Trả lại</a>
               </li>
               <li>
-                <a href="#">Payment options</a>
+                <a href="#">Các lựa chọn thanh toán</a>
               </li>
               <li>
-                <a href="#">Contact Us</a>
+                <a href="#">Liên hệ chúng tôi</a>
               </li>
             </ul>
             <ul>
-              <li>Information</li>
+              <li>Thông tin</li>
               <li>
-                <a href="#">Gift Cards</a>
+                <a href="#">Thẻ quà tặng</a>
               </li>
               <li>
-                <a href="#">Find a store</a>
+                <a href="#">Bản tin</a>
               </li>
               <li>
-                <a href="#">Newsletter</a>
+                <a href="#">Trở thành một thành viên</a>
               </li>
               <li>
-                <a href="#">Bacome a member</a>
-              </li>
-              <li>
-                <a href="#">Site feedback</a>
+                <a href="#">Phản hồi về trang web</a>
               </li>
             </ul>
             <ul>

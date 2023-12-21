@@ -32,7 +32,7 @@ const Products = () => {
       <section className="products-page">
         <div className="container">
           <ProductsFilter returnFilter={returnFilter} />
-          <ProductsContent product={product} />
+          <ProductsContent returnFilter={returnFilter} product={product} />
         </div>
       </section>
       <Footer />

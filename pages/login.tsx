@@ -107,12 +107,12 @@ const LoginPage = () => {
                     <p>Nhớ mật khẩu</p>
                   </label>
                 </div>
-                <a
+                {/* <a
                   href="/forgot-password"
                   className="form__info__forgot-password"
                 >
                   Quên tài khoản?
-                </a>
+                </a> */}
               </div>
 
               <button

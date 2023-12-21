@@ -25,7 +25,7 @@ const Content = ({ product }: ProductContent) => {
   const { favProducts } = useSelector((state: RootState) => state.user);
   const isFavourite = some(
     favProducts,
-    (productId) => productId === product.id
+    (productId) => productId === product?.id
   );
 
   const toggleFav = () => {
@@ -40,45 +40,46 @@ const Content = ({ product }: ProductContent) => {
 
   const addToCart = async () => {
     if (itemColor && itemProduct?.length) {
-      if (LocalStorage?.getToken()) {
-        const productToSave: ProductStoreType = {
-          id: itemProduct[0].id,
-          name: product.name,
-          product_images: product?.product_images,
-          // product_prices: product?.product_prices,
-          amount: amount,
-          price: minPrice,
-          color: itemProduct[0].color,
-        };
-        const productStore = {
-          quantity: productToSave.amount,
-          product_price_id: Number(productToSave.id),
-        };
-        await CartService.cart(productStore).then((res) => {
-          if (res.status) {
-            Notification("success", "Thêm vào giỏ hàng thành công");
-          }
-        });
-      } else {
-        const productToSave: ProductStoreType = {
-          id: itemProduct[0].id,
-          name: product.name,
-          product_images: product?.product_images,
-          // product_prices: product?.product_prices,
-          amount: amount,
-          price: minPrice,
-          color: itemProduct[0].color,
-        };
+      // if (LocalStorage?.getToken()) {
+      //   const productToSave: ProductStoreType = {
+      //     id: itemProduct[0].id,
+      //     name: product.name,
+      //     product_images: product?.product_images,
+      //     // product_prices: product?.product_prices,
+      //     amount: amount,
+      //     price: minPrice,
+      //     color: itemProduct[0].color,
+      //   };
+      //   const productStore = {
+      //     quantity: productToSave.amount,
+      //     product_price_id: Number(productToSave.id),
+      //   };
+      //   await CartService.cart(productStore).then((res) => {
+      //     if (res.status) {
+      //       Notification("success", "Thêm vào giỏ hàng thành công");
+      //     }
+      //   });
+      // } else {
 
-        const productStore = {
-          amount,
-          product: productToSave,
-        };
-        console.log("productToSave", productToSave);
+      // }
+      const productToSave: ProductStoreType = {
+        id: itemProduct[0].id,
+        name: product.name,
+        product_images: product?.product_images,
+        // product_prices: product?.product_prices,
+        amount: amount,
+        price: minPrice,
+        color: itemProduct[0].color,
+      };
 
-        dispatch(addProduct(productStore));
-        Notification("success", "Thêm vào giỏ hàng thành công");
-      }
+      const productStore = {
+        amount,
+        product: productToSave,
+      };
+      console.log("productToSave", productToSave);
+
+      dispatch(addProduct(productStore));
+      Notification("success", "Thêm vào giỏ hàng thành công");
     } else {
       Notification("warning", "Vui lòng chọn màu sắc của sản phẩm");
     }
