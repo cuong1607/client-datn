@@ -1,3 +1,5 @@
+import { Image } from "antd";
+
 type GalleryProductType = {
   images: any[];
 };
@@ -9,13 +11,15 @@ const Gallery = ({ images }: GalleryProductType) => {
       <div className="product-gallery__thumbs">
         {images?.map((image) => (
           <div key={image?.id} className="product-gallery__thumb">
-            <img src={image?.path} alt="" />
+            {/* <img src={image?.path} alt="" /> */}
+            <Image src={image?.path}/>
           </div>
         ))}
       </div>
 
       <div className="product-gallery__image">
-        <img src={featImage || ""} alt="" />
+        {/* <img src={featImage || ""} alt="" /> */}
+        <Image src={featImage || ''}/>
       </div>
     </section>
   );

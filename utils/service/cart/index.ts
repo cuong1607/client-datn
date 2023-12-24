@@ -10,4 +10,8 @@ export const CartService = {
     const url = `/cart`;
     return AxiosClient.post(url, data);
   },
+  getCart: () => {
+    const url = `/cart`;
+    return AxiosClient.get(url);
+  },
 };

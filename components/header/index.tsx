@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import { RootState } from "store";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { ThemeContext } from "components/context/theme-context";
-import { LogoutOutlined } from "@ant-design/icons";
 import LocalStorage from "utils/LocalStorage";
 type HeaderType = {
   isErrorPage?: Boolean;
@@ -88,9 +87,9 @@ const Header = ({ isErrorPage }: HeaderType) => {
           <a
             style={{ height: "25px" }}
             className="hvr-underline-from-left"
-            href="#"
+            href="/contact"
           >
-            Danh mục sản phẩm
+            Liên hệ
           </a>
 
           <button className="site-nav__btn">

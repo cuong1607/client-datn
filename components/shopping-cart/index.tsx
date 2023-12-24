@@ -14,7 +14,6 @@ const ShoppingCart = () => {
 
     return currencyFormat(totalPrice);
   };
-  console.log("cartItems", cartItems);
 
   return (
     <section className="cart">

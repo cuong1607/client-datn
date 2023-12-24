@@ -7,8 +7,6 @@ import { ProductType, ProductStoreType } from "types";
 import { RootState } from "store";
 import { Notification, currencyFormat } from "utils";
 import { Select } from "antd";
-import LocalStorage from "utils/LocalStorage";
-import { CartService } from "../../../utils/service/cart";
 
 type ProductContent = {
   product: ProductType;
@@ -35,8 +33,6 @@ const Content = ({ product }: ProductContent) => {
       })
     );
   };
-  console.log("itemProduct", itemProduct);
-  console.log("product", product);
 
   const addToCart = async () => {
     if (itemColor && itemProduct?.length) {
