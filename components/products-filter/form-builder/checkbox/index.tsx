@@ -33,7 +33,7 @@ function CheckBoxComponent({
       return AxiosClient(`${apiUrl}`, {
         params: { ...params, search, limit: 15 },
       }).then((body) =>
-        body.data?.map((data: any) => ({
+        body?.data?.map((data: any) => ({
           label: fieldShow1
             ? `${data[fieldShow]}-${data[fieldShow1]}`
             : `${data[fieldShow] || "-"}`,

@@ -10,6 +10,7 @@ import { useQuery } from "react-query";
 import { IDataOrder, IProduct, OrderService } from "../../utils/service/order";
 import { useRouter } from "next/router";
 import { removeProductAll } from "store/reducers/cart";
+import LocalStorage from "utils/LocalStorage";
 
 const CheckoutPage = () => {
   const router = useRouter();
@@ -74,6 +75,11 @@ const CheckoutPage = () => {
 
             <div className="checkout-content">
               <div className="checkout__col-6">
+                {/* {LocalStorage.getToken() ? (
+                  <></>
+                ) : (
+                 
+                )} */}
                 <div className="checkout__btns">
                   <button className="btn btn--rounded btn--yellow">
                     Đăng nhập

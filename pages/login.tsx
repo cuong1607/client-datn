@@ -6,6 +6,8 @@ import { Notification } from "utils";
 import { useRouter } from "next/router";
 import LocalStorage from "utils/LocalStorage";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { removeProductAll } from "store/reducers/cart";
 
 type FormValues = {
   phone: string;
@@ -15,7 +17,7 @@ type FormValues = {
 
 const LoginPage = () => {
   const router = useRouter();
-
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -37,6 +39,7 @@ const LoginPage = () => {
       LocalStorage.setToken(res?.data?.token);
       Notification("success", "Đăng nhập thành công");
       router.push("/");
+      dispatch(removeProductAll());
     }
   };
 

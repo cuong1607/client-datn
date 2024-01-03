@@ -34,13 +34,11 @@ const ProductsContent = ({
                 defaultValue="asc"
                 style={{ width: 120 }}
                 onChange={(value) => {
-                  console.log("value", value);
-
                   returnFilter({ order: value });
                 }}
                 options={[
-                  { value: "asc", label: "Mới nhất" },
-                  { value: "desc", label: "Cũ nhất" },
+                  { value: "desc", label: "Mới nhất" },
+                  { value: "asc", label: "Cũ nhất" },
                 ]}
               />
             </div>
@@ -51,9 +49,12 @@ const ProductsContent = ({
               <Select
                 defaultValue="lucy"
                 style={{ width: 120 }}
+                onChange={(value) => {
+                  returnFilter({ sort: value });
+                }}
                 options={[
-                  { value: "lucy", label: "Tăng - Giảm" },
-                  { value: "ass", label: "Giảm - Tăng" },
+                  { value: "desc", label: "Tăng - Giảm" },
+                  { value: "asc", label: "Giảm - Tăng" },
                 ]}
               />
             </div>

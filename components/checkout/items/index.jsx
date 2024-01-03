@@ -5,8 +5,8 @@ const CheckoutItems = () => {
   const { cartItems } = useSelector(state => state.cart);
   return (
     <ul className="checkout-items">
-      {cartItems.map(item => (
-        <li className="checkout-item">
+      {cartItems.map((item, index) => (
+        <li key={index} className="checkout-item">
           <div className="checkout-item__content">
             <div className="checkout-item__img">
               <img src={item.product_images[0].path} />

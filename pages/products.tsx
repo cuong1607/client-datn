@@ -17,6 +17,7 @@ const Products = () => {
       ProductService.get({
         page: page,
         ...filterQuery,
+        status: true,
       })
   );
   const returnFilter = React.useCallback(

@@ -46,7 +46,7 @@ const ProductsFilter = ({
           </div>
         </div>
 
-        <div className="products-filter__block">
+        {/* <div className="products-filter__block">
           <button type="button">Giá tiền</button>
           <div className="products-filter__block__content">
             <Range
@@ -59,7 +59,7 @@ const ProductsFilter = ({
               tipFormatter={(value) => `${currencyFormat(value)}đ`}
             />
           </div>
-        </div>
+        </div> */}
 
         <div className="products-filter__block">
           <button type="button">Màu sắc</button>
