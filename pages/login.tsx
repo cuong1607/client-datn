@@ -39,7 +39,7 @@ const LoginPage = () => {
       LocalStorage.setToken(res?.data?.token);
       Notification("success", "Đăng nhập thành công");
       router.push("/");
-      dispatch(removeProductAll());
+      // dispatch(removeProductAll());
     }
   };
 

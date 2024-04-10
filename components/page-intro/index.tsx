@@ -40,7 +40,7 @@ const PageIntro = () => {
           </div>
         </SwiperSlide>
 
-        <SwiperSlide>
+        {/* <SwiperSlide>
           <div
             className="page-intro__slide"
             style={{ backgroundImage: "url('/images/slide-2.jpg')" }}
@@ -54,7 +54,7 @@ const PageIntro = () => {
               </div>
             </div>
           </div>
-        </SwiperSlide>
+        </SwiperSlide> */}
 
         <SwiperSlide>
           <div
@@ -63,7 +63,7 @@ const PageIntro = () => {
           >
             <div className="container">
               <div className="page-intro__slide__content">
-                <h2>Giảm giá mùa hè...</h2>
+                <h2>Thương hiệu kính mắt của sự tinh tế...</h2>
                 <a href="#" className="btn-shop">
                   <i className="icon-right"></i>Mua ngay
                 </a>

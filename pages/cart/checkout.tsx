@@ -80,14 +80,14 @@ const CheckoutPage = () => {
                 ) : (
                  
                 )} */}
-                <div className="checkout__btns">
+                {/* <div className="checkout__btns">
                   <button className="btn btn--rounded btn--yellow">
                     Đăng nhập
                   </button>
                   <button className="btn btn--rounded btn--border">
                     Đăng ký
                   </button>
-                </div>
+                </div> */}
 
                 <div className="block">
                   <h3 className="block__title">Thông tin nhận hàng</h3>
